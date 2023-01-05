@@ -30,16 +30,23 @@ export default function Home({ posts }: PostsProps) {
             <a href="https://github.com/samuelkraft/notion-blog-nextjs">Github</a> or read{' '}
             <a href="https://samuelkraft.com/blog/building-a-notion-blog-with-public-api">my blogpost</a> on building your own. */}
           </p>
+          <div className={styles.menu}>
+            <Link href="/">Home</Link>
+            <Link href="/indie">Indie Dev</Link>
+          </div>
         </header>
 
         <h2 className={styles.heading}>All Posts</h2>
         <ol className={styles.posts}>
           {posts.map((post) => {
-            const { slug, id, title, date, excerpt } = getData(post)
+            const { slug, id, title, date, excerpt, icon } = getData(post)
             return (
               <li key={id} className={styles.post}>
                 <h3 className={styles.postTitle}>
-                  <Link href={`/${slug}`}>{title}</Link>
+                  <Link href={`/${slug}`}>
+                    {icon ? `${icon} ` : ''}
+                    {title}
+                  </Link>
                 </h3>
                 <p className={styles.postDescription}>{excerpt}</p>
                 <p className={styles.postDescription}>{date}</p>
@@ -54,7 +61,25 @@ export default function Home({ posts }: PostsProps) {
 }
 
 export const getStaticProps = async () => {
-  const database = await getDatabase(databaseId)
+  let filter
+  if (process.env.NODE_ENV === 'production') {
+    filter = {
+      property: 'Published',
+      checkbox: {
+        equals: true,
+      },
+    }
+  }
+  const database = await getDatabase(
+    databaseId,
+    [
+      {
+        property: 'Date',
+        direction: 'descending',
+      },
+    ],
+    filter
+  )
 
   return {
     props: {

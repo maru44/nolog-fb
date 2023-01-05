@@ -20,13 +20,6 @@
   line-height: 1.5;
 }
 
-.menu {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  margin-top: 20px;
-}
-
 .plus {
   font-size: 20px;
   margin: 0 20px;

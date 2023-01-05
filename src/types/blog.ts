@@ -17,4 +17,5 @@ export type Blog = {
   category: string
   tags: string[]
   published: boolean
+  icon?: string
 }

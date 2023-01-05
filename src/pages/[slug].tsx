@@ -26,7 +26,10 @@ export default function Post({ blog, blocks }: PostProps) {
         {/* <link rel="icon" href="/favicon.ico" /> */}
       </Head>
       <article className={styles.container}>
-        <h1 className={styles.name}>{blog.title}</h1>
+        <h1 className={styles.name}>
+          {blog.icon ? `${blog.icon} ` : ''}
+          {blog.title}
+        </h1>
         <p className={styles.excerpt}>{blog.excerpt}</p>
         <section>
           {blocks.map((block) => (
