@@ -3,158 +3,34 @@ import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
 import { ParsedUrlQuery } from 'querystring'
-import { Fragment } from 'react'
-import { Text } from 'src/components/Text'
+import { Block } from 'src/components/Block'
 import { databaseId } from 'src/config'
 import styles from 'src/styles/post.module.css'
-// import { Blog } from 'src/types/blog'
+import { Blog } from 'src/types/blog'
 import { blockWithChildren } from 'src/types/notion'
-import { getBlocks, getDatabase, getPageSlug, getPageTitle } from '../lib/notion'
-
-// const renderNestedList = (block) => {
-//   const { type } = block
-//   const value = block[type]
-//   if (!value) return null
-
-//   const isNumberedList = value.children[0].type === 'numbered_list_item'
-
-//   if (isNumberedList) {
-//     return <ol>{value.children.map((block) => renderBlock(block))}</ol>
-//   }
-//   return <ul>{value.children.map((block) => renderBlock(block))}</ul>
-// }
-
-const renderBlock = (block: blockWithChildren) => {
-  const { type, id } = block
-
-  switch (type) {
-    case 'paragraph':
-      return (
-        <p>
-          <Text texts={block.paragraph.rich_text} styles={styles} />
-        </p>
-      )
-    case 'heading_1':
-      return (
-        <h1>
-          <Text texts={block.heading_1.rich_text} styles={styles} />
-        </h1>
-      )
-    case 'heading_2':
-      return (
-        <h2>
-          <Text texts={block.heading_2.rich_text} styles={styles} />
-        </h2>
-      )
-    case 'heading_3':
-      return (
-        <h3>
-          <Text texts={block.heading_3.rich_text} styles={styles} />
-        </h3>
-      )
-    case 'bulleted_list_item':
-      return (
-        <li>
-          <Text texts={block.bulleted_list_item.rich_text} styles={styles} />
-        </li>
-      )
-    case 'numbered_list_item':
-      return (
-        <li>
-          <Text texts={block.numbered_list_item.rich_text} styles={styles} />
-        </li>
-      )
-    case 'to_do':
-      return (
-        <div>
-          <label htmlFor={id}>
-            <input type="checkbox" id={id} defaultChecked={block.to_do.checked} /> <Text texts={block.to_do.rich_text} styles={styles} />
-          </label>
-        </div>
-      )
-    case 'toggle':
-      return (
-        <details>
-          <summary>
-            <Text texts={block.toggle.rich_text} styles={styles} />
-          </summary>
-          {/* {value.children?.map((block) => (
-            <Fragment key={block.id}>{renderBlock(block)}</Fragment>
-          ))} */}
-        </details>
-      )
-    case 'child_page':
-      return <p>{block.child_page.title}</p>
-    case 'image':
-      const src = block.image.type === 'external' ? block.image.external.url : block.image.file.url
-      const caption = block.image.caption ? block.image.caption[0]?.plain_text : ''
-      return (
-        <figure>
-          <img src={src} alt={caption} />
-          {caption && <figcaption>{caption}</figcaption>}
-        </figure>
-      )
-    case 'divider':
-      return <hr key={id} />
-    case 'quote':
-      return <blockquote key={id}>{block.quote.rich_text[0].plain_text}</blockquote>
-    case 'code':
-      return (
-        <pre className={styles.pre}>
-          <code className={styles.code_block} key={id}>
-            {block.code.rich_text[0].plain_text}
-          </code>
-        </pre>
-      )
-    case 'file':
-      const src_file = block.file.type === 'external' ? block.file.external.url : block.file.file.url
-      const splitSourceArray = src_file.split('/')
-      const lastElementInArray = splitSourceArray[splitSourceArray.length - 1]
-      const caption_file = block.file.caption ? block.file.caption[0]?.plain_text : ''
-      return (
-        <figure>
-          <div className={styles.file}>
-            📎{' '}
-            <Link href={src_file} passHref>
-              {lastElementInArray.split('?')[0]}
-            </Link>
-          </div>
-          {caption_file && <figcaption>{caption_file}</figcaption>}
-        </figure>
-      )
-    case 'bookmark':
-      const href = block.bookmark.url
-      return (
-        <a href={href} target="_brank" className={styles.bookmark}>
-          {href}
-        </a>
-      )
-    default:
-      return `❌ Unsupported block (${type === 'unsupported' ? 'unsupported by Notion API' : type})`
-  }
-}
+import { getBlocks, getData, getDatabase, getPageSlug } from '../lib/notion'
 
 type PostProps = {
   blocks: blockWithChildren[]
-  title?: string
+  blog: Blog
 }
 
-export default function Post({ title, blocks }: PostProps) {
-  if (!title || !blocks) {
-    return <div />
+export default function Post({ blog, blocks }: PostProps) {
+  if (!blocks) {
+    return <></>
   }
   return (
     <div>
       <Head>
-        <title>{title}</title>
+        <title>{blog.title}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
       <article className={styles.container}>
-        <h1 className={styles.name}>{title}</h1>
+        <h1 className={styles.name}>{blog.title}</h1>
+        <p>{blog.excerpt}</p>
         <section>
           {blocks.map((block) => (
-            <Fragment key={block.id}>{renderBlock(block)}</Fragment>
+            <Block key={block.id} block={block} styles={styles} />
           ))}
           <Link href="/" className={styles.back}>
             ← Go home
@@ -205,7 +81,7 @@ export const getStaticProps: GetStaticProps<PostProps> = async (context) => {
 
   return {
     props: {
-      title: getPageTitle(page!),
+      blog: getData(page!),
       blocks: blocks,
     },
     revalidate: 1,

@@ -8,7 +8,7 @@
 //   }
 // }
 
-export type Post = {
+export type Blog = {
   id: string
   slug: string
   title: string
@@ -16,4 +16,5 @@ export type Post = {
   date: string
   category: string
   tags: string[]
+  published: boolean
 }
