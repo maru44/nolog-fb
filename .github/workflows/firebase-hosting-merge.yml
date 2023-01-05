@@ -6,6 +6,9 @@ name: Deploy to Firebase Hosting on merge
   push:
     branches:
       - master
+env:
+  NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+  DATABASE_ID: ${{ secrets.DATABASE_ID }}
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
