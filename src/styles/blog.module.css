@@ -26,6 +26,11 @@
   .name {
     font-size: 36px;
   }
+
+  .excerpt {
+    font-size: 18px;
+    font-weight: 700;
+  }
   
   .back {
     display: inline-block;

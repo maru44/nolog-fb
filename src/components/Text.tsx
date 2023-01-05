@@ -9,7 +9,7 @@ export const Text = ({ texts, styles }: TextProps) => {
   if (!texts) {
     return null
   }
-  const elements = texts.map((value) => {
+  const elements = texts.map((value, i) => {
     switch (value.type) {
       case 'equation':
       case 'mention':
@@ -29,6 +29,7 @@ export const Text = ({ texts, styles }: TextProps) => {
               underline ? styles.underline : '',
             ].join(' ')}
             style={color !== 'default' ? { color } : {}}
+            key={i}
           >
             {text.link ? <a href={text.link.url}>{text.content}</a> : text.content}
           </span>

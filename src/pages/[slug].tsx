@@ -5,10 +5,10 @@ import Link from 'next/link'
 import { ParsedUrlQuery } from 'querystring'
 import { Block } from 'src/components/Block'
 import { databaseId } from 'src/config'
-import styles from 'src/styles/post.module.css'
+import { getBlocks, getData, getDatabase, getPageSlug } from 'src/lib/notion'
+import styles from 'src/styles/blog.module.css'
 import { Blog } from 'src/types/blog'
 import { blockWithChildren } from 'src/types/notion'
-import { getBlocks, getData, getDatabase, getPageSlug } from '../lib/notion'
 
 type PostProps = {
   blocks: blockWithChildren[]
@@ -23,11 +23,11 @@ export default function Post({ blog, blocks }: PostProps) {
     <div>
       <Head>
         <title>{blog.title}</title>
-        <link rel="icon" href="/favicon.ico" />
+        {/* <link rel="icon" href="/favicon.ico" /> */}
       </Head>
       <article className={styles.container}>
         <h1 className={styles.name}>{blog.title}</h1>
-        <p>{blog.excerpt}</p>
+        <p className={styles.excerpt}>{blog.excerpt}</p>
         <section>
           {blocks.map((block) => (
             <Block key={block.id} block={block} styles={styles} />
