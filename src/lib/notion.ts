@@ -7,9 +7,26 @@ const notion = new Client({
   auth: process.env.NOTION_TOKEN,
 })
 
+// ref: https://www.npmjs.com/package/@notionhq/client
 export const getDatabase = async (databaseId: string) => {
+  let filter
+  if (process.env.NODE_ENV === 'production') {
+    filter = {
+      property: 'Published',
+      checkbox: {
+        equals: true,
+      },
+    }
+  }
   const response = await notion.databases.query({
     database_id: databaseId,
+    filter: filter,
+    sorts: [
+      {
+        property: 'Date',
+        direction: 'descending',
+      },
+    ],
   })
   return response.results
 }
