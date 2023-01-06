@@ -112,6 +112,16 @@ export const Block = ({ block, styles }: BlockProps) => {
           {href}
         </a>
       )
+    case 'video':
+      if (block.video.type === 'external') {
+        return (
+          <div className={styles.iframeWrapper}>
+            <iframe src={block.video.external.url} />
+          </div>
+        )
+      }
+      return <iframe src={block.video.file.url} />
+    //   return <iframe src=''></iframe>
     default:
       console.error(`❌ Unsupported block (${type === 'unsupported' ? 'unsupported by Notion API' : type})`)
       return <></>
