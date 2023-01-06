@@ -4,7 +4,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { ParsedUrlQuery } from 'querystring'
 import { Block } from 'src/components/Block'
-import { databaseId } from 'src/config'
+import { blogDatabaseId } from 'src/config'
 import { getBlocks, getData, getDatabase, getPageSlug } from 'src/lib/notion'
 import styles from 'src/styles/blog.module.css'
 import { Blog } from 'src/types/blog'
@@ -45,7 +45,7 @@ export default function Post({ blog, blocks }: PostProps) {
 }
 
 export const getStaticPaths = async () => {
-  const database = (await getDatabase(databaseId)) as PageObjectResponse[]
+  const database = (await getDatabase(blogDatabaseId)) as PageObjectResponse[]
   return {
     paths: database.map((page) => ({ params: { slug: getPageSlug(page) } })),
     fallback: true,
@@ -58,7 +58,7 @@ interface IParams extends ParsedUrlQuery {
 
 export const getStaticProps: GetStaticProps<PostProps> = async (context) => {
   const { slug } = context.params as IParams
-  const database = (await getDatabase(databaseId)) as PageObjectResponse[]
+  const database = (await getDatabase(blogDatabaseId)) as PageObjectResponse[]
   const page = database.find((page) => getPageSlug(page) === slug)
   const blocks = await getBlocks(page!.id)
 

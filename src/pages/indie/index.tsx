@@ -1,5 +1,8 @@
 import { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 import Head from 'next/head'
+import Link from 'next/link'
+import { Chip } from 'src/components/Chip'
+import { Header } from 'src/components/Header'
 import { SkillIcon } from 'src/components/SkillIcon'
 import { indieDatabaseId } from 'src/config'
 import { getDatabase, getIndieData } from 'src/lib/notion'
@@ -16,27 +19,47 @@ const Indies = ({ indies }: IndiesProps) => {
         <title>Maru's Indie Works</title>
       </Head>
       <main className={styles.container}>
-        <header className={styles.header}>
-          <h1>Indie Works</h1>
-        </header>
+        <Header current="indie" />
         <h2 className={styles.heading}>Web Apps</h2>
         <ol className={styles.posts}>
           {indies &&
             indies.map((v) => {
-              const { id, title, span, excerpt, icon, skills } = getIndieData(v)
+              const { id, title, span, excerpt, icon, skills, url, slug, status } = getIndieData(v)
+              if (title === '') return
               return (
                 <li key={id} className={styles.post}>
                   <h3 className={styles.postTitle}>
-                    {icon ? `${icon} ` : ''}
-                    {title}
+                    <Link href={`/indie/${slug}`}>
+                      {icon ? `${icon} ` : ''}
+                      {title}
+                    </Link>
                   </h3>
+                  {status !== 'unknown' && (
+                    <div className={styles.chip}>
+                      <Chip value={status} status={status === 'active' ? 'success' : 'disabled'} />
+                    </div>
+                  )}
                   <p className={styles.postDescription}>{excerpt}</p>
                   <p className={styles.postDescription}>{span}</p>
-                  <p className={styles.postDescription}>
+                  <div className={styles.skills}>
                     {skills.map((s, i) => (
-                      <SkillIcon key={i} skill={s} />
+                      <div key={i} className={styles.skill}>
+                        <SkillIcon skill={s} />
+                      </div>
                     ))}
-                  </p>
+                  </div>
+                  <div className={styles.links}>
+                    <div className="">
+                      <Link href={`/indie/${slug}`}>Detail</Link>
+                    </div>
+                    {url && (
+                      <div className="">
+                        <Link href={url} target="_blank">
+                          Go
+                        </Link>
+                      </div>
+                    )}
+                  </div>
                 </li>
               )
             })}
@@ -47,7 +70,12 @@ const Indies = ({ indies }: IndiesProps) => {
 }
 
 export const getStaticProps = async () => {
-  const database = await getDatabase(indieDatabaseId)
+  const database = await getDatabase(indieDatabaseId, [
+    {
+      property: 'Span',
+      direction: 'descending',
+    },
+  ])
 
   return {
     props: {

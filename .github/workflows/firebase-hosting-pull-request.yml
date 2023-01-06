@@ -5,7 +5,8 @@ name: Deploy to Firebase Hosting on PR
 'on': pull_request
 env:
   NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
-  DATABASE_ID: ${{ secrets.DATABASE_ID }}
+  BLOG_DATABASE_ID: ${{ secrets.DATABASE_ID }}
+  INDIE_DATABASE_ID: ${{ secrets.INDIE_DATABASE_ID }}
 jobs:
   build_and_preview:
     if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'

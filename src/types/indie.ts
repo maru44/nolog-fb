@@ -9,5 +9,6 @@ export type Indie = {
   span: string
   status: IndieStatus
   images: string[]
-  icon?: string
+  icon: string | null
+  url: string | null
 }

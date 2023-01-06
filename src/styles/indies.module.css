@@ -60,8 +60,33 @@
   color: inherit;
 }
 
+.chip {
+  margin-bottom: 12px;
+}
+
 .postDescription {
   margin-top: 0;
   margin-bottom: 12px;
   opacity: 0.65;
+}
+
+.skills {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  opacity: 0.65;
+}
+
+.skills > div {
+  margin-right: 6px;
+}
+
+.skills i {
+  font-size: 24px;
+}
+
+.links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

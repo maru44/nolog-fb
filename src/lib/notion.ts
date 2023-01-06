@@ -85,7 +85,7 @@ export const getData = (page: PageObjectResponse): Blog => {
   const id = page.id
   let title: string = '',
     slug: string = '',
-    icon: string | undefined,
+    icon: string | null = null,
     excerpt: string = '',
     date: string = '',
     category: string = '',
@@ -131,12 +131,13 @@ export const getIndieData = (page: PageObjectResponse): Indie => {
   const id = page.id
   let title: string = '',
     slug: string = '',
-    icon: string | undefined,
+    icon: string | null = null,
     excerpt: string = '',
     span: string = '',
     skills: string[] = [],
     status: IndieStatus = 'unknown',
-    images: string[] = []
+    images: string[] = [],
+    url: string | null = null
   if (page.properties.Page.type === 'title' && page.properties.Page.title.length > 0) {
     title = page.properties.Page.title[0].plain_text
   }
@@ -198,5 +199,8 @@ export const getIndieData = (page: PageObjectResponse): Indie => {
   if (page.icon?.type === 'emoji') {
     icon = page.icon.emoji
   }
-  return { id, icon, title, slug, excerpt, span, skills, status, images }
+  if (page.properties.URL.type === 'url' && page.properties.URL.url !== null) {
+    url = page.properties.URL.url
+  }
+  return { id, icon, title, slug, excerpt, span, skills, status, images, url }
 }
