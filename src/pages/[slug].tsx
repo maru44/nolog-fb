@@ -48,7 +48,7 @@ export const getStaticPaths = async () => {
   const database = (await getDatabase(blogDatabaseId)) as PageObjectResponse[]
   return {
     paths: database.map((page) => ({ params: { slug: getPageSlug(page) } })),
-    fallback: true,
+    fallback: 'blocking',
   }
 }
 
@@ -87,6 +87,5 @@ export const getStaticProps: GetStaticProps<PostProps> = async (context) => {
       blog: getData(page!),
       blocks: blocks,
     },
-    revalidate: 1,
   }
 }

@@ -60,7 +60,7 @@ export const getStaticPaths = async () => {
   const database = (await getDatabase(indieDatabaseId)) as PageObjectResponse[]
   return {
     paths: database.map((page) => ({ params: { slug: getPageSlug(page) } })),
-    fallback: true,
+    fallback: 'blocking',
   }
 }
 
@@ -79,6 +79,5 @@ export const getStaticProps: GetStaticProps<IndieProps> = async (context) => {
       indie: getIndieData(page!),
       blocks: blocks,
     },
-    revalidate: 1,
   }
 }
