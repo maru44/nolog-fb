@@ -49,6 +49,7 @@ export const getStaticPaths = async () => {
   return {
     paths: database.map((page) => ({ params: { slug: getPageSlug(page) } })),
     // fallback: 'blocking',
+    fallback: false,
   }
 }
 
