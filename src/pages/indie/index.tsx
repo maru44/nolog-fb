@@ -16,7 +16,7 @@ const Indies = ({ indies }: IndiesProps) => {
   return (
     <div>
       <Head>
-        <title>Maru's Indie Works</title>
+        <title>Maru&apos;s Indie Works</title>
       </Head>
       <main className={styles.container}>
         <Header current="indie" />
@@ -49,11 +49,11 @@ const Indies = ({ indies }: IndiesProps) => {
                     ))}
                   </div>
                   <div className={styles.links}>
-                    <div className="">
+                    <div>
                       <Link href={`/indie/${slug}`}>Detail</Link>
                     </div>
                     {url && (
-                      <div className="">
+                      <div>
                         <Link href={url} target="_blank">
                           Go
                         </Link>
