@@ -75,6 +75,7 @@
   align-items: center;
   flex-wrap: wrap;
   opacity: 0.65;
+  margin-bottom: 10px;
 }
 
 .skills > div {

@@ -4,6 +4,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { ParsedUrlQuery } from 'querystring'
 import { Block } from 'src/components/Block'
+import { Chip } from 'src/components/Chip'
 import { SkillIcon } from 'src/components/SkillIcon'
 import { indieDatabaseId } from 'src/config'
 import { getBlocks, getDatabase, getIndieData, getPageSlug } from 'src/lib/notion'
@@ -19,7 +20,6 @@ type IndieProps = {
 export default function IndieDetail({ indie, blocks }: IndieProps) {
   if (!blocks) return <></>
 
-  console.log(indie)
   return (
     <div>
       <Head>
@@ -30,6 +30,11 @@ export default function IndieDetail({ indie, blocks }: IndieProps) {
           {indie.icon ? `${indie.icon} ` : ''}
           {indie.title}
         </h1>
+        {indie.status !== 'unknown' && (
+          <div className={styles.chip}>
+            <Chip value={indie.status} status={indie.status === 'active' ? 'success' : 'disabled'} />
+          </div>
+        )}
         <p className={styles.excerpt}>{indie.excerpt}</p>
         <div>
           <p className={styles.postDescription}>{indie.span}</p>
@@ -40,7 +45,16 @@ export default function IndieDetail({ indie, blocks }: IndieProps) {
               </div>
             ))}
           </div>
+          {indie.url && (
+            <p className={styles.postDescription}>
+              URL:{` `}
+              <Link href={indie.url} target="_blank">
+                {indie.url}
+              </Link>
+            </p>
+          )}
         </div>
+        <hr className={styles.divider} />
         <section>
           {blocks.map((block) => (
             <Block key={block.id} block={block} styles={styles} />
