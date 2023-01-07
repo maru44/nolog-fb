@@ -1,6 +1,7 @@
 import { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 import Head from 'next/head'
 import Link from 'next/link'
+import { Footer } from 'src/components/Footer'
 import { Header } from 'src/components/Header'
 import { blogDatabaseId } from 'src/config'
 import { getData, getDatabase } from 'src/lib/notion'
@@ -40,6 +41,8 @@ export default function Home({ posts }: PostsProps) {
           })}
         </ol>
       </main>
+      <hr className="divider" />
+      <Footer />
     </div>
   )
 }

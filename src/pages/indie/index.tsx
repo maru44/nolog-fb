@@ -2,6 +2,7 @@ import { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 import Head from 'next/head'
 import Link from 'next/link'
 import { Chip } from 'src/components/Chip'
+import { Footer } from 'src/components/Footer'
 import { Header } from 'src/components/Header'
 import { SkillIcon } from 'src/components/SkillIcon'
 import { indieDatabaseId } from 'src/config'
@@ -65,6 +66,8 @@ const Indies = ({ indies }: IndiesProps) => {
             })}
         </ol>
       </main>
+      <hr className="divider" />
+      <Footer />
     </div>
   )
 }

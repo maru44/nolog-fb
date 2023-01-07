@@ -30,3 +30,8 @@ a {
 h1 {
   font-weight: 800;
 }
+
+.divider {
+  width: 100%;
+  size: 1;
+}

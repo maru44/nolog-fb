@@ -25,7 +25,7 @@ export const Header = ({ current = 'home' }: HeaderProps) => {
       </p>
       <div className={styles.menu}>
         <Link href="/" className={current === 'home' ? styles.selected : undefined}>
-          Home
+          Blog
         </Link>
         <Link href="/indie" className={current === 'indie' ? styles.selected : undefined}>
           Indie Dev

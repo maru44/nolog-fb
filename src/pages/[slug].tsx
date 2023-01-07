@@ -4,6 +4,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { ParsedUrlQuery } from 'querystring'
 import { Block } from 'src/components/Block'
+import { Footer } from 'src/components/Footer'
 import { blogDatabaseId } from 'src/config'
 import { getBlocks, getData, getDatabase, getPageSlug } from 'src/lib/notion'
 import styles from 'src/styles/blog.module.css'
@@ -40,6 +41,8 @@ export default function Post({ blog, blocks }: PostProps) {
           </Link>
         </section>
       </article>
+      <hr className="divider" />
+      <Footer />
     </div>
   )
 }
