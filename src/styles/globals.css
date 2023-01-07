@@ -34,4 +34,5 @@ h1 {
 .divider {
   width: 100%;
   size: 1;
+  margin: 0;
 }
