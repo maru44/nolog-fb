@@ -37,7 +37,7 @@ export default function Post({ blog, blocks }: PostProps) {
             <Block key={block.id} block={block} styles={styles} />
           ))}
           <Link href="/" className={styles.back}>
-            ← Go home
+            ← Go Home
           </Link>
         </section>
       </article>

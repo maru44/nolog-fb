@@ -62,7 +62,7 @@ export default function IndieDetail({ indie, blocks }: IndieProps) {
           ))}
           <div style={{ marginTop: '20px' }}>
             <Link href="/indie" className={styles.back}>
-              ← Back to list of indie
+              ← List of Indie Works
             </Link>
           </div>
         </section>
