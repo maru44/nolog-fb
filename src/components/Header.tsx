@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { getStorageURL } from 'src/config'
+import { getStorageURL, GithubURL } from 'src/config'
 import styles from 'src/styles/components/header.module.css'
 
 type CurrentPage = 'home' | 'indie'
@@ -23,6 +23,13 @@ export const Header = ({ current = 'home' }: HeaderProps) => {
       <a href="https://github.com/samuelkraft/notion-blog-nextjs">Github</a> or read{' '}
       <a href="https://samuelkraft.com/blog/building-a-notion-blog-with-public-api">my blogpost</a> on building your own. */}
       </p>
+      <div className={styles.accounts}>
+        <div>
+          <Link href={GithubURL} target="_blank">
+            <i className="devicon-github-original" />
+          </Link>
+        </div>
+      </div>
       <div className={styles.menu}>
         <Link href="/" className={current === 'home' ? styles.selected : undefined}>
           Blog

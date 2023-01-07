@@ -6,3 +6,5 @@ export const getStorageURL = (name: string) => {
   if (name.startsWith('/')) return `${publicStorage}${name}`
   return `${publicStorage}/${name}`
 }
+
+export const GithubURL = `https://github.com/${process.env.NEXT_PUBLIC_GITHUB_ACCOUNT}`

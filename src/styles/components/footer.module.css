@@ -11,6 +11,24 @@
   margin: 0;
 }
 
+.footer a {
+  color: inherit;
+}
+
+.footer i:hover {
+  color: rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
+
+.copyRight {
+  margin-right: 10px;
+}
+
+.copyRightZone {
+  display: flex;
+  align-items: center;
+}
+
 .createdBy {
   font-size: 12px;
 }
