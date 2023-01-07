@@ -80,7 +80,6 @@ export const getBlocks = async (blockId: string) => {
 }
 
 // blog
-
 export const getData = (page: PageObjectResponse): Blog => {
   const id = page.id
   let title: string = '',
@@ -126,7 +125,6 @@ export const getData = (page: PageObjectResponse): Blog => {
 }
 
 // indie
-
 export const getIndieData = (page: PageObjectResponse): Indie => {
   const id = page.id
   let title: string = '',
