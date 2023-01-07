@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { getStorageURL } from 'src/config'
 import styles from 'src/styles/components/header.module.css'
 
 type CurrentPage = 'home' | 'indie'
@@ -11,7 +12,7 @@ export const Header = ({ current = 'home' }: HeaderProps) => {
   return (
     <header className={styles.header}>
       <div className={styles.logos}>
-        <img src="/kilroy.jpg" width="50%" />
+        <img src={getStorageURL('kilroy.jpg')} width="50%" />
       </div>
       <h1>Maru</h1>
       <p>
