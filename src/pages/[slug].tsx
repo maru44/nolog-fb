@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { ParsedUrlQuery } from 'querystring'
 import { Block } from 'src/components/Block'
 import { Footer } from 'src/components/Footer'
-import { blogDatabaseId } from 'src/config'
+import { blogDatabaseId, getStorageURL } from 'src/config'
 import { getBlocks, getData, getDatabase, getPageSlug } from 'src/lib/notion'
 import styles from 'src/styles/blog.module.css'
 import { Blog } from 'src/types/blog'
@@ -24,7 +24,14 @@ export default function Post({ blog, blocks }: PostProps) {
     <div>
       <Head>
         <title>{blog.title}</title>
-        {/* <link rel="icon" href="/favicon.ico" /> */}
+        <meta property="og:title" content={blog.title} />
+        <meta property="og:type" content="article" />
+        <meta property="description" content={blog.excerpt} />
+        <meta property="og:image" content={getStorageURL('kilroy.jpg')} />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content={blog.title} />
+        <meta name="twitter:description" content={blog.excerpt} />
+        <meta name="twitter:image" content={getStorageURL('kirloy.jpg')} />
       </Head>
       <article className={styles.container}>
         <h1 className={styles.name}>

@@ -7,7 +7,7 @@ import { Block } from 'src/components/Block'
 import { Chip } from 'src/components/Chip'
 import { Footer } from 'src/components/Footer'
 import { SkillIcon } from 'src/components/SkillIcon'
-import { indieDatabaseId } from 'src/config'
+import { getStorageURL, indieDatabaseId } from 'src/config'
 import { getBlocks, getDatabase, getIndieData, getPageSlug } from 'src/lib/notion'
 import styles from 'src/styles/indie.module.css'
 import { Indie } from 'src/types/indie'
@@ -25,6 +25,14 @@ export default function IndieDetail({ indie, blocks }: IndieProps) {
     <div>
       <Head>
         <title>{indie.title}</title>
+        <meta property="og:title" content={indie.title} />
+        <meta property="og:type" content="article" />
+        <meta property="description" content={indie.excerpt} />
+        <meta property="og:image" content={getStorageURL('kilroy.jpg')} />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content={indie.title} />
+        <meta name="twitter:description" content={indie.excerpt} />
+        <meta name="twitter:image" content={getStorageURL('kirloy.jpg')} />
       </Head>
       <article className={styles.container}>
         <h1 className={styles.name}>

@@ -3,7 +3,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { Footer } from 'src/components/Footer'
 import { Header } from 'src/components/Header'
-import { blogDatabaseId } from 'src/config'
+import { blogDatabaseId, getStorageURL } from 'src/config'
 import { getData, getDatabase } from 'src/lib/notion'
 import styles from 'src/styles/index.module.css'
 
@@ -16,7 +16,12 @@ export default function Home({ posts }: PostsProps) {
     <div>
       <Head>
         <title>Maru</title>
-        {/* <link rel="icon" href="/favicon.ico" /> */}
+        <meta property="og:title" content="Maru's Blog" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content={getStorageURL('kilroy.jpg')} />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="Maru's Blog" />
+        <meta name="twitter:image" content={getStorageURL('kirloy.jpg')} />
       </Head>
 
       <main className={styles.container}>

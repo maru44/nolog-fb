@@ -5,7 +5,7 @@ import { Chip } from 'src/components/Chip'
 import { Footer } from 'src/components/Footer'
 import { Header } from 'src/components/Header'
 import { SkillIcon } from 'src/components/SkillIcon'
-import { indieDatabaseId } from 'src/config'
+import { getStorageURL, indieDatabaseId } from 'src/config'
 import { getDatabase, getIndieData } from 'src/lib/notion'
 import styles from 'src/styles/indies.module.css'
 
@@ -18,6 +18,12 @@ const Indies = ({ indies }: IndiesProps) => {
     <div>
       <Head>
         <title>Maru&apos;s Indie Works</title>
+        <meta property="og:title" content="Maru's Indie Works" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content={getStorageURL('kilroy.jpg')} />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="Maru's Indie Works" />
+        <meta name="twitter:image" content={getStorageURL('kirloy.jpg')} />
       </Head>
       <main className={styles.container}>
         <Header current="indie" />
