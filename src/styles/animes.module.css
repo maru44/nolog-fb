@@ -53,3 +53,15 @@
   align-items: center;
   justify-content: space-between;
 }
+
+.post .animeName {
+  width: 70%;
+}
+
+.post .animeScore {
+  width: 10%;
+}
+
+.post .animeStatus {
+  width: 20%;
+}

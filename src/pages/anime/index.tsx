@@ -1,5 +1,6 @@
 import { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 import Head from 'next/head'
+import { Chip, ColorFromAnimeStatus } from 'src/components/Chip'
 import { Footer } from 'src/components/Footer'
 import { Header } from 'src/components/Header'
 import { animeDatabaseId, getStorageURL } from 'src/config'
@@ -33,11 +34,13 @@ const Animes = ({ animes }: AnimesProps) => {
               return (
                 <li key={i} className={styles.post}>
                   <div>
-                    <p>
+                    <p className={styles.animeName}>
                       <b>{name}</b>
                     </p>
-                    <div>{scoreStr}</div>
-                    <div>{status}</div>
+                    <div className={styles.animeScore}>{scoreStr}</div>
+                    <div className={styles.animeStatus}>
+                      <Chip status={ColorFromAnimeStatus(status)} value={status} />
+                    </div>
                   </div>
                 </li>
               )
