@@ -55,7 +55,7 @@ export default function Post({ blog, blocks }: PostProps) {
 }
 
 export const getStaticPaths = async () => {
-  const database = (await getDatabase(blogDatabaseId)) as PageObjectResponse[]
+  const database = await getDatabase(blogDatabaseId)
   return {
     paths: database.map((page) => ({ params: { slug: getPageSlug(page) } })),
     // fallback: 'blocking',

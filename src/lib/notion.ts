@@ -1,5 +1,6 @@
 import { Client } from '@notionhq/client'
 import { BlockObjectResponse, PageObjectResponse } from '@notionhq/client/build/src/api-endpoints'
+import { Anime, AnimeStatus } from 'src/types/anime'
 import { Blog } from 'src/types/blog'
 import { Indie, IndieStatus } from 'src/types/indie'
 import { blockWithChildren } from 'src/types/notion'
@@ -23,14 +24,26 @@ export const getDatabase = async (
           }
       )[]
     | undefined,
-  filter?: any
+  filter?: any,
+  start_cursor?: string
 ) => {
-  const response = await notion.databases.query({
-    database_id: databaseId,
-    filter: filter,
-    sorts: sorts,
-  })
-  return response.results
+  let hasNext = true
+  let results: PageObjectResponse[] = []
+  let cursor = start_cursor
+  while (hasNext) {
+    const response = await notion.databases.query({
+      database_id: databaseId,
+      filter: filter,
+      sorts: sorts,
+      start_cursor: cursor,
+    })
+    results = results.concat(response.results as PageObjectResponse[])
+    hasNext = response.has_more
+    if (response.next_cursor) {
+      cursor = response.next_cursor
+    }
+  }
+  return results
 }
 
 export const getPageSlug = (page: PageObjectResponse) => {
@@ -201,4 +214,26 @@ export const getIndieData = (page: PageObjectResponse): Indie => {
     url = page.properties.URL.url
   }
   return { id, icon, title, slug, excerpt, span, skills, status, images, url }
+}
+
+// anime
+export const getAnimeData = (page: PageObjectResponse): Anime => {
+  const id = page.id
+  let name: string = '',
+    status: AnimeStatus = 'unknown',
+    score: number | null = null,
+    scoreStr: string = '-'
+  if (page.properties.Name.type === 'title' && page.properties.Name.title.length > 0) {
+    name = page.properties.Name.title[0].plain_text
+  }
+  if (page.properties.Status.type === 'select' && page.properties.Status.select) {
+    status = page.properties.Status.select.name as AnimeStatus
+  }
+  if (page.properties.Score.type === 'number') {
+    score = page.properties.Score.number
+    if (!!score) {
+      scoreStr = score.toString()
+    }
+  }
+  return { name, status, score, scoreStr }
 }
