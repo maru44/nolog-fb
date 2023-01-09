@@ -3,7 +3,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { Footer } from 'src/components/Footer'
 import { Header } from 'src/components/Header'
-import { blogDatabaseId, getStorageURL } from 'src/config'
+import { blogDatabaseId, ENV, getStorageURL } from 'src/config'
 import { getData, getDatabase } from 'src/lib/notion'
 import styles from 'src/styles/index.module.css'
 
@@ -54,7 +54,7 @@ export default function Home({ posts }: PostsProps) {
 
 export const getStaticProps = async () => {
   let filter
-  if (process.env.NODE_ENV === 'production') {
+  if (ENV === 'production') {
     filter = {
       property: 'Published',
       checkbox: {

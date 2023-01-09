@@ -31,7 +31,13 @@ export const Text = ({ texts, styles }: TextProps) => {
             style={color !== 'default' ? { color } : {}}
             key={i}
           >
-            {text.link ? <a href={text.link.url}>{text.content}</a> : text.content}
+            {text.link ? (
+              <a href={text.link.url} target="_blank">
+                {text.content}
+              </a>
+            ) : (
+              text.content
+            )}
           </span>
         )
       }
