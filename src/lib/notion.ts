@@ -24,7 +24,12 @@ export const getDatabase = async (
           }
       )[]
     | undefined,
-  filter?: any,
+  filter?: {
+    property: string
+    checkbox: {
+      equals: boolean
+    }
+  },
   start_cursor?: string
 ) => {
   let hasNext = true
@@ -171,7 +176,7 @@ export const getIndieData = (page: PageObjectResponse): Indie => {
     if (!end && !start) {
       span = '???'
     } else {
-      span = `${start} - ${end}`
+      span = `${start ?? ''} - ${end ?? ''}`
     }
   }
   if (page.properties.Status.type === 'select' && page.properties.Status.select) {
