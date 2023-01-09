@@ -61,9 +61,6 @@ export const Block = ({ block, styles }: BlockProps) => {
           <summary>
             <Text texts={block.toggle.rich_text} styles={styles} />
           </summary>
-          {/* {value.children?.map((block) => (
-              <Fragment key={block.id}>{renderBlock(block)}</Fragment>
-            ))} */}
         </details>
       )
     case 'child_page':
@@ -121,11 +118,9 @@ export const Block = ({ block, styles }: BlockProps) => {
         )
       }
       return <iframe src={block.video.file.url} />
-    //   return <iframe src=''></iframe>
     default:
       console.error(`❌ Unsupported block (${type === 'unsupported' ? 'unsupported by Notion API' : type})`)
       return <></>
-    //   return `❌ Unsupported block (${type === 'unsupported' ? 'unsupported by Notion API' : type})`
   }
 }
 
