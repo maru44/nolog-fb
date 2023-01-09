@@ -90,7 +90,6 @@ export const getStaticProps = async () => {
     props: {
       indies: database,
     },
-    revalidate: 1,
   }
 }
 

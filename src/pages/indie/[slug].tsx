@@ -85,7 +85,6 @@ export const getStaticPaths = async () => {
   const database = await getDatabase(indieDatabaseId)
   return {
     paths: database.map((page) => ({ params: { slug: getPageSlug(page) } })),
-    // fallback: 'blocking',
     fallback: false,
   }
 }

@@ -9,7 +9,7 @@ export const Footer = () => {
         <div className={styles.copyRightZone}>
           <div className={styles.copyRight}>&copy; maru</div>
           <div>
-            <Link href={GithubURL} target="_blank">
+            <Link href={`${GithubURL}/nolog-fb`} target="_blank">
               <i className="devicon-github-original" />
             </Link>
           </div>
