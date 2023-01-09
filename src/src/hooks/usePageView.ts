@@ -10,7 +10,6 @@ export const usePageView = () => {
       return
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleRouteChange = (url: URL) => pageview(url)
 
     router.events.on('routeChangeComplete', handleRouteChange)
