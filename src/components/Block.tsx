@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { Fragment } from 'react'
 import { Text } from 'src/components/Text'
 import { blockWithChildren } from 'src/types/notion'
 
@@ -36,12 +37,28 @@ export const Block = ({ block, styles }: BlockProps) => {
         </h3>
       )
     case 'bulleted_list_item':
+      if (block.has_children && block.children) {
+        return (
+          <li>
+            <Text texts={block.bulleted_list_item.rich_text} styles={styles} />
+            <ul>{block.children && block.children.map((c, i) => <Block key={i} block={c} styles={styles} />)}</ul>
+          </li>
+        )
+      }
       return (
         <li>
           <Text texts={block.bulleted_list_item.rich_text} styles={styles} />
         </li>
       )
     case 'numbered_list_item':
+      if (block.has_children && block.children) {
+        return (
+          <li>
+            <Text texts={block.numbered_list_item.rich_text} styles={styles} />
+            <ol>{block.children && block.children.map((c, i) => <Block key={i} block={c} styles={styles} />)}</ol>
+          </li>
+        )
+      }
       return (
         <li>
           <Text texts={block.numbered_list_item.rich_text} styles={styles} />
@@ -61,6 +78,11 @@ export const Block = ({ block, styles }: BlockProps) => {
           <summary>
             <Text texts={block.toggle.rich_text} styles={styles} />
           </summary>
+          <>
+            {block.children?.map((block) => (
+              <Fragment key={block.id}>{<Block block={block} styles={styles} />}</Fragment>
+            ))}
+          </>
         </details>
       )
     case 'child_page':

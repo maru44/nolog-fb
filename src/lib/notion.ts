@@ -1,5 +1,5 @@
 import { Client } from '@notionhq/client'
-import { BlockObjectResponse, PageObjectResponse } from '@notionhq/client/build/src/api-endpoints'
+import { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 import { Anime, AnimeStatus } from 'src/types/anime'
 import { Blog } from 'src/types/blog'
 import { Indie, IndieStatus } from 'src/types/indie'
@@ -55,23 +55,6 @@ export const getPage = async (pageId: string) => {
   return response
 }
 
-// export const getBlocks = async (blockId: string) => {
-//   const blocks = []
-//   let cursor: string | undefined
-//   while (true) {
-//     const { results, next_cursor } = await notion.blocks.children.list({
-//       start_cursor: cursor,
-//       block_id: blockId,
-//     })
-//     blocks.push(...results)
-//     if (!next_cursor) {
-//       break
-//     }
-//     cursor = next_cursor
-//   }
-//   return blocks
-// }
-
 export const getBlocks = async (blockId: string) => {
   const blocks: blockWithChildren[] = []
   let cursor: undefined | string = undefined
@@ -81,7 +64,18 @@ export const getBlocks = async (blockId: string) => {
       start_cursor: cursor,
       block_id: blockId,
     })
-    blocks.push(...(blocksList.results as BlockObjectResponse[]))
+
+    const results = blocksList.results as blockWithChildren[]
+
+    for (const c of results) {
+      if (c.has_children) {
+        const children = await getBlocks(c.id)
+        c.children = children
+        blocks.push(c)
+      } else {
+        blocks.push(c)
+      }
+    }
 
     const next_cursor = blocksList.next_cursor as string | null
     if (!next_cursor) {
