@@ -1,10 +1,10 @@
 import { GA_TRACKING_ID } from 'src/config'
 
-// declare global {
-//   interface Window {
-//     gtag: Gtag.Gtag
-//   }
-// }
+declare global {
+  interface window {
+    gtag: any
+  }
+}
 
 export const pageview = (url: URL): void => {
   if (!GA_TRACKING_ID) return
