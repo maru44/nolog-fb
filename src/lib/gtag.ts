@@ -1,7 +1,7 @@
 import { GA_TRACKING_ID } from 'src/config'
 
 declare global {
-  interface window {
+  interface Window {
     gtag: any
   }
 }
