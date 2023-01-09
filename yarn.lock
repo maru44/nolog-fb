@@ -247,6 +247,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/gtag.js@npm:^0.0.12":
+  version: 0.0.12
+  resolution: "@types/gtag.js@npm:0.0.12"
+  checksum: 34efc27fbfd0013255b8bfd4af38ded9d5a6ba761130c76f17fd3a9585d83acc88d8005aab667cfec4bdec0e7c7217f689739799a8f61aed0edb929be58b162e
+  languageName: node
+  linkType: hard
+
 "@types/json5@npm:^0.0.29":
   version: 0.0.29
   resolution: "@types/json5@npm:0.0.29"
@@ -1917,6 +1924,7 @@ __metadata:
   dependencies:
     "@next/font": 13.1.1
     "@notionhq/client": ^2.2.3
+    "@types/gtag.js": ^0.0.12
     "@types/node": 18.11.18
     "@types/react": 18.0.26
     "@types/react-dom": 18.0.10
