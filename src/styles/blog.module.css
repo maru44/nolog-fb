@@ -5,6 +5,10 @@
   line-height: 1.5;
 }
 
+.container .content {
+  white-space: pre-wrap;
+}
+
 .container h1 {
   font-size: 32px;
 }

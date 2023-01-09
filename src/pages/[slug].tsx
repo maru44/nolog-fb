@@ -39,7 +39,7 @@ export default function Post({ blog, blocks }: PostProps) {
           {blog.title}
         </h1>
         <p className={styles.excerpt}>{blog.excerpt}</p>
-        <section>
+        <section className={styles.content}>
           {blocks.map((block) => (
             <Block key={block.id} block={block} styles={styles} />
           ))}

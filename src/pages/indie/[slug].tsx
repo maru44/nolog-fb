@@ -64,7 +64,7 @@ export default function IndieDetail({ indie, blocks }: IndieProps) {
           )}
         </div>
         <hr className="divider" />
-        <section>
+        <section className={styles.content}>
           {blocks.map((block) => (
             <Block key={block.id} block={block} styles={styles} />
           ))}
