@@ -32,7 +32,7 @@ export const Text = ({ texts, styles }: TextProps) => {
             key={i}
           >
             {text.link ? (
-              <a href={text.link.url} target="_blank">
+              <a href={text.link.url} target="_blank" rel="noopener noreferrer">
                 {text.content}
               </a>
             ) : (
