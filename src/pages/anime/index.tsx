@@ -1,7 +1,6 @@
 import { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 import Head from 'next/head'
 import { Chip, ColorFromAnimeStatus } from 'src/components/Chip'
-import { Footer } from 'src/components/Footer'
 import { Header } from 'src/components/Header'
 import { animeDatabaseId, getStorageURL } from 'src/config'
 import { getAnimeData, getDatabase } from 'src/lib/notion'
@@ -47,8 +46,6 @@ const Animes = ({ animes }: AnimesProps) => {
             })}
         </ol>
       </main>
-      <hr className="divider" />
-      <Footer />
     </div>
   )
 }

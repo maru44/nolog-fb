@@ -1,7 +1,6 @@
 import { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 import Head from 'next/head'
 import Link from 'next/link'
-import { Footer } from 'src/components/Footer'
 import { Header } from 'src/components/Header'
 import { blogDatabaseId, ENV, getStorageURL } from 'src/config'
 import { getData, getDatabase } from 'src/lib/notion'
@@ -23,7 +22,6 @@ export default function Home({ posts }: PostsProps) {
         <meta name="twitter:title" content="Maru's Blog" />
         <meta name="twitter:image" content={getStorageURL('kirloy.jpg')} />
       </Head>
-
       <main className={styles.container}>
         <Header />
         <h2 className={styles.heading}>All Posts</h2>
@@ -46,8 +44,6 @@ export default function Home({ posts }: PostsProps) {
           })}
         </ol>
       </main>
-      <hr className="divider" />
-      <Footer />
     </div>
   )
 }

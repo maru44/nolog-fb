@@ -5,7 +5,6 @@ import Link from 'next/link'
 import { ParsedUrlQuery } from 'querystring'
 import { Block } from 'src/components/Block'
 import { Chip } from 'src/components/Chip'
-import { Footer } from 'src/components/Footer'
 import { SkillIcon } from 'src/components/SkillIcon'
 import { getStorageURL, indieDatabaseId } from 'src/config'
 import { getBlocks, getDatabase, getIndieData, getPageSlug } from 'src/lib/notion'
@@ -75,8 +74,6 @@ export default function IndieDetail({ indie, blocks }: IndieProps) {
           </div>
         </section>
       </article>
-      <hr className="divider" />
-      <Footer />
     </div>
   )
 }
