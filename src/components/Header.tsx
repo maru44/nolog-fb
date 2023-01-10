@@ -32,7 +32,7 @@ export const Header = ({ current = 'home' }: HeaderProps) => {
           Blog
         </Link>
         <Link href="/indie" className={current === 'indie' ? styles.selected : undefined}>
-          Indie Dev
+          Indie
         </Link>
         <Link href="/anime" className={current === 'anime' ? styles.selected : undefined}>
           Anime
