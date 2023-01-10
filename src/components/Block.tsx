@@ -87,7 +87,7 @@ export const Block = ({ block, styles }: BlockProps) => {
       )
     case 'child_page':
       return <p>{block.child_page.title}</p>
-    case 'image':
+    case 'image': {
       const src = block.image.type === 'external' ? block.image.external.url : block.image.file.url
       const caption = block.image.caption ? block.image.caption[0]?.plain_text : ''
       return (
@@ -96,10 +96,15 @@ export const Block = ({ block, styles }: BlockProps) => {
           {caption && <figcaption>{caption}</figcaption>}
         </figure>
       )
+    }
     case 'divider':
       return <hr key={id} />
     case 'quote':
-      return <blockquote key={id}>{block.quote.rich_text[0].plain_text}</blockquote>
+      return (
+        <blockquote key={id}>
+          <Text texts={block.quote.rich_text} styles={styles} />
+        </blockquote>
+      )
     case 'code':
       return (
         <pre className={styles.pre}>
@@ -131,15 +136,14 @@ export const Block = ({ block, styles }: BlockProps) => {
           {href}
         </a>
       )
-    case 'video':
-      if (block.video.type === 'external') {
-        return (
-          <div className={styles.iframeWrapper}>
-            <iframe src={block.video.external.url} />
-          </div>
-        )
-      }
-      return <iframe src={block.video.file.url} />
+    case 'video': {
+      const src = block.video.type === 'external' ? block.video.external.url : block.video.file.url
+      return (
+        <div className={styles.iframeWrapper}>
+          <iframe src={src} />
+        </div>
+      )
+    }
     default:
       console.error(`❌ Unsupported block (${type === 'unsupported' ? 'unsupported by Notion API' : type})`)
       return <></>

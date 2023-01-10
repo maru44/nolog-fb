@@ -7,7 +7,7 @@ export const Footer = () => {
     <footer className={styles.footer}>
       <div className={styles.container}>
         <div className={styles.copyRightZone}>
-          <div className={styles.copyRight}>&copy; maru</div>
+          <div className={styles.copyRight}>&copy; 2023 maru</div>
           <div>
             <Link href={`${GithubURL}/nolog-fb`} target="_blank">
               <i className="devicon-github-original" />
