@@ -30,7 +30,7 @@ export default function Post({ blog, blocks }: PostProps) {
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content={blog.title} />
         <meta name="twitter:description" content={blog.excerpt} />
-        <meta name="twitter:image" content={getStorageURL('kirloy.jpg')} />
+        <meta name="twitter:image" content={getStorageURL('kilroy.jpg')} />
       </Head>
       <article className={styles.container}>
         <h1 className={styles.name}>

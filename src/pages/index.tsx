@@ -20,7 +20,7 @@ export default function Home({ posts }: PostsProps) {
         <meta property="og:image" content={getStorageURL('kilroy.jpg')} />
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content="Maru's Blog" />
-        <meta name="twitter:image" content={getStorageURL('kirloy.jpg')} />
+        <meta name="twitter:image" content={getStorageURL('kilroy.jpg')} />
       </Head>
       <main className={styles.container}>
         <Header />

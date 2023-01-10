@@ -31,7 +31,7 @@ export default function IndieDetail({ indie, blocks }: IndieProps) {
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content={indie.title} />
         <meta name="twitter:description" content={indie.excerpt} />
-        <meta name="twitter:image" content={getStorageURL('kirloy.jpg')} />
+        <meta name="twitter:image" content={getStorageURL('kilroy.jpg')} />
       </Head>
       <article className={styles.container}>
         <h1 className={styles.name}>
