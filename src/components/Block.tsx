@@ -140,7 +140,7 @@ export const Block = ({ block, styles }: BlockProps) => {
       const src = block.video.type === 'external' ? block.video.external.url : block.video.file.url
       return (
         <div className={styles.iframeWrapper}>
-          <iframe src={src} />
+          <iframe src={src} title={src} />
         </div>
       )
     }
