@@ -1,5 +1,5 @@
 import { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints'
-import { blockWithChildren } from './notion'
+import { blockWithChildren } from 'src/types/notion'
 
 export type ListPage = 'home' | 'indie' | 'anime'
 

@@ -234,5 +234,5 @@ export const getAnimeData = (page: PageObjectResponse): Anime => {
       scoreStr = score.toString()
     }
   }
-  return { name, status, score, scoreStr }
+  return { id, name, status, score, scoreStr }
 }
