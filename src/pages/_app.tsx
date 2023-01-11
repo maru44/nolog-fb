@@ -1,7 +1,7 @@
 import type { AppProps } from 'next/app'
 import { Footer } from 'src/components/Footer'
 import { usePageView } from 'src/src/hooks/usePageView'
-import '../styles/globals.css'
+import 'src/styles/globals.css'
 
 export default function App({ Component, pageProps }: AppProps) {
   usePageView()
