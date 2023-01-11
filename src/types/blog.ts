@@ -1,13 +1,3 @@
-// export type Blog = {
-//   id: string
-//   // properties: BlogProperties
-//   properties: {
-//     Name: {
-//       title: blockWithChildren[]
-//     }
-//   }
-// }
-
 export type Blog = {
   id: string
   slug: string
