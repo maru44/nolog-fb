@@ -10,54 +10,51 @@ import { getStorageURL, indieDatabaseId } from 'src/config'
 import { getBlocks, getDatabase, getIndieData, getPageSlug } from 'src/lib/notion'
 import styles from 'src/styles/indie.module.css'
 import { Indie } from 'src/types/indie'
-import { blockWithChildren } from 'src/types/notion'
+import { DetailPageProps } from 'src/types/page'
 
-type IndieProps = {
-  blocks: blockWithChildren[]
-  indie: Indie
-}
+type IndieProps = DetailPageProps<Indie>
 
-export default function IndieDetail({ indie, blocks }: IndieProps) {
+export default function IndieDetail({ data, blocks }: IndieProps) {
   if (!blocks) return <></>
 
   return (
     <div>
       <Head>
-        <title>{indie.title}</title>
-        <meta property="og:title" content={indie.title} />
+        <title>{data.title}</title>
+        <meta property="og:title" content={data.title} />
         <meta property="og:type" content="article" />
-        <meta property="description" content={indie.excerpt} />
+        <meta property="description" content={data.excerpt} />
         <meta property="og:image" content={getStorageURL('kilroy.jpg')} />
         <meta name="twitter:card" content="summary" />
-        <meta name="twitter:title" content={indie.title} />
-        <meta name="twitter:description" content={indie.excerpt} />
+        <meta name="twitter:title" content={data.title} />
+        <meta name="twitter:description" content={data.excerpt} />
         <meta name="twitter:image" content={getStorageURL('kilroy.jpg')} />
       </Head>
       <article className={styles.container}>
         <h1 className={styles.name}>
-          {indie.icon ? `${indie.icon} ` : ''}
-          {indie.title}
+          {data.icon ? `${data.icon} ` : ''}
+          {data.title}
         </h1>
-        {indie.status !== 'unknown' && (
+        {data.status !== 'unknown' && (
           <div className={styles.chip}>
-            <Chip value={indie.status} status={indie.status === 'active' ? 'success' : 'disabled'} />
+            <Chip value={data.status} status={data.status === 'active' ? 'success' : 'disabled'} />
           </div>
         )}
-        <p className={styles.excerpt}>{indie.excerpt}</p>
+        <p className={styles.excerpt}>{data.excerpt}</p>
         <div>
-          <p className={styles.postDescription}>{indie.span}</p>
+          <p className={styles.postDescription}>{data.span}</p>
           <div className={styles.skills}>
-            {indie.skills.map((s, i) => (
+            {data.skills.map((s, i) => (
               <div key={i} className={styles.skill}>
                 <SkillIcon skill={s} />
               </div>
             ))}
           </div>
-          {indie.url && (
+          {data.url && (
             <p className={styles.postDescription}>
               URL:{` `}
-              <Link href={indie.url} target="_blank">
-                {indie.url}
+              <Link href={data.url} target="_blank">
+                {data.url}
               </Link>
             </p>
           )}
@@ -90,15 +87,15 @@ interface IParams extends ParsedUrlQuery {
   slug: string
 }
 
-export const getStaticProps: GetStaticProps<IndieProps> = async (context) => {
-  const { slug } = context.params as IParams
+export const getStaticProps: GetStaticProps<IndieProps, IParams> = async (context) => {
+  const { slug } = context.params!
   const database = (await getDatabase(indieDatabaseId)) as PageObjectResponse[]
   const page = database.find((page) => getPageSlug(page) === slug)
   const blocks = await getBlocks(page!.id)
 
   return {
     props: {
-      indie: getIndieData(page!),
+      data: getIndieData(page!),
       blocks: blocks,
     },
   }

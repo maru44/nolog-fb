@@ -1,14 +1,19 @@
 import Link from 'next/link'
 import { getStorageURL, GithubURL } from 'src/config'
 import styles from 'src/styles/components/header.module.css'
+import { ListPage } from 'src/types/page'
 
-type CurrentPage = 'home' | 'indie' | 'anime'
-
-type HeaderProps = {
-  current?: CurrentPage
+type PageWithPath = {
+  page: ListPage
+  path?: string
 }
 
-export const Header = ({ current = 'home' }: HeaderProps) => {
+type HeaderProps = {
+  page?: ListPage
+}
+
+export const Header = ({ page }: HeaderProps) => {
+  if (!page) return null
   return (
     <header className={styles.header}>
       <div className={styles.logos}>
@@ -16,9 +21,9 @@ export const Header = ({ current = 'home' }: HeaderProps) => {
       </div>
       <h1>Maru</h1>
       <p>
-        {current === 'home' && 'A libertarian. An web engineer.'}
-        {current === 'indie' && 'Indie Works'}
-        {current === 'anime' && 'Just my personal opinion'}
+        {page === 'home' && 'A libertarian. An web engineer.'}
+        {page === 'indie' && 'Indie Works'}
+        {page === 'anime' && 'Just my personal opinion'}
       </p>
       <div className={styles.accounts}>
         <div>
@@ -28,13 +33,13 @@ export const Header = ({ current = 'home' }: HeaderProps) => {
         </div>
       </div>
       <div className={styles.menu}>
-        <Link href="/" className={current === 'home' ? styles.selected : undefined}>
+        <Link href="/" className={page === 'home' ? styles.selected : undefined}>
           Blog
         </Link>
-        <Link href="/indie" className={current === 'indie' ? styles.selected : undefined}>
+        <Link href="/indie" className={page === 'indie' ? styles.selected : undefined}>
           Indie
         </Link>
-        <Link href="/anime" className={current === 'anime' ? styles.selected : undefined}>
+        <Link href="/anime" className={page === 'anime' ? styles.selected : undefined}>
           Anime
         </Link>
       </div>

@@ -1,18 +1,14 @@
-import { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints'
+import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
 import { Chip } from 'src/components/Chip'
-import { Header } from 'src/components/Header'
 import { SkillIcon } from 'src/components/SkillIcon'
 import { getStorageURL, indieDatabaseId } from 'src/config'
 import { getDatabase, getIndieData } from 'src/lib/notion'
 import styles from 'src/styles/indies.module.css'
+import { ListPageProps } from 'src/types/page'
 
-type IndiesProps = {
-  indies: PageObjectResponse[]
-}
-
-const Indies = ({ indies }: IndiesProps) => {
+const Indies = ({ data }: ListPageProps) => {
   return (
     <div>
       <Head>
@@ -25,11 +21,10 @@ const Indies = ({ indies }: IndiesProps) => {
         <meta name="twitter:image" content={getStorageURL('kilroy.jpg')} />
       </Head>
       <main className={styles.container}>
-        <Header current="indie" />
         <h2 className={styles.heading}>Web Apps</h2>
         <ol className={styles.posts}>
-          {indies &&
-            indies.map((v) => {
+          {data &&
+            data.map((v) => {
               const { id, title, span, excerpt, icon, skills, url, slug, status } = getIndieData(v)
               if (title === '') return
               return (
@@ -75,7 +70,7 @@ const Indies = ({ indies }: IndiesProps) => {
   )
 }
 
-export const getStaticProps = async () => {
+export const getStaticProps: GetStaticProps<ListPageProps> = async () => {
   const database = await getDatabase(indieDatabaseId, [
     {
       property: 'Span',
@@ -85,7 +80,8 @@ export const getStaticProps = async () => {
 
   return {
     props: {
-      indies: database,
+      data: database,
+      page: 'indie',
     },
   }
 }

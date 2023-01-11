@@ -8,36 +8,33 @@ import { blogDatabaseId, getStorageURL } from 'src/config'
 import { getBlocks, getData, getDatabase, getPageSlug } from 'src/lib/notion'
 import styles from 'src/styles/blog.module.css'
 import { Blog } from 'src/types/blog'
-import { blockWithChildren } from 'src/types/notion'
+import { DetailPageProps } from 'src/types/page'
 
-type PostProps = {
-  blocks: blockWithChildren[]
-  blog: Blog
-}
+type PostProps = DetailPageProps<Blog>
 
-export default function Post({ blog, blocks }: PostProps) {
+export default function Post({ data, blocks }: PostProps) {
   if (!blocks) {
     return <></>
   }
   return (
     <div>
       <Head>
-        <title>{blog.title}</title>
-        <meta property="og:title" content={blog.title} />
+        <title>{data.title}</title>
+        <meta property="og:title" content={data.title} />
         <meta property="og:type" content="article" />
-        <meta property="description" content={blog.excerpt} />
+        <meta property="description" content={data.excerpt} />
         <meta property="og:image" content={getStorageURL('kilroy.jpg')} />
         <meta name="twitter:card" content="summary" />
-        <meta name="twitter:title" content={blog.title} />
-        <meta name="twitter:description" content={blog.excerpt} />
+        <meta name="twitter:title" content={data.title} />
+        <meta name="twitter:description" content={data.excerpt} />
         <meta name="twitter:image" content={getStorageURL('kilroy.jpg')} />
       </Head>
       <article className={styles.container}>
         <h1 className={styles.name}>
-          {blog.icon ? `${blog.icon} ` : ''}
-          {blog.title}
+          {data.icon ? `${data.icon} ` : ''}
+          {data.title}
         </h1>
-        <p className={styles.excerpt}>{blog.excerpt}</p>
+        <p className={styles.excerpt}>{data.excerpt}</p>
         <section className={styles.content}>
           {blocks.map((block) => (
             <Block key={block.id} block={block} styles={styles} />
@@ -55,7 +52,6 @@ export const getStaticPaths = async () => {
   const database = await getDatabase(blogDatabaseId)
   return {
     paths: database.map((page) => ({ params: { slug: getPageSlug(page) } })),
-    // fallback: 'blocking',
     fallback: false,
   }
 }
@@ -64,8 +60,8 @@ interface IParams extends ParsedUrlQuery {
   slug: string
 }
 
-export const getStaticProps: GetStaticProps<PostProps> = async (context) => {
-  const { slug } = context.params as IParams
+export const getStaticProps: GetStaticProps<PostProps, IParams> = async (context) => {
+  const { slug } = context.params!
   const database = (await getDatabase(blogDatabaseId)) as PageObjectResponse[]
   const page = database.find((page) => getPageSlug(page) === slug)
   const blocks = await getBlocks(page!.id)
@@ -92,7 +88,7 @@ export const getStaticProps: GetStaticProps<PostProps> = async (context) => {
 
   return {
     props: {
-      blog: getData(page!),
+      data: getData(page!),
       blocks: blocks,
     },
   }

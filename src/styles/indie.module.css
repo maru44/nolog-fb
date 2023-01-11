@@ -1,12 +1,4 @@
-.container {
-  padding: 0 20px 80px 20px;
-  max-width: 700px;
-  margin: 0 auto;
-  line-height: 1.5;
-  min-height: calc(100vh - 101px);
-}
-
-.container .content {
+.content {
   white-space: pre-wrap;
 }
 

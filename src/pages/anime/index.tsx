@@ -1,16 +1,12 @@
-import { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints'
+import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import { Chip, ColorFromAnimeStatus } from 'src/components/Chip'
-import { Header } from 'src/components/Header'
 import { animeDatabaseId, getStorageURL } from 'src/config'
 import { getAnimeData, getDatabase } from 'src/lib/notion'
 import styles from 'src/styles/animes.module.css'
+import { ListPageProps } from 'src/types/page'
 
-type AnimesProps = {
-  animes: PageObjectResponse[]
-}
-
-const Animes = ({ animes }: AnimesProps) => {
+const Animes = ({ data }: ListPageProps) => {
   return (
     <div>
       <Head>
@@ -23,11 +19,10 @@ const Animes = ({ animes }: AnimesProps) => {
         <meta name="twitter:image" content={getStorageURL('kilroy.jpg')} />
       </Head>
       <main className={styles.container}>
-        <Header current="anime" />
         <h2 className={styles.heading}>Anime Scoring</h2>
         <ol className={styles.posts}>
-          {animes &&
-            animes.map((v, i) => {
+          {data &&
+            data.map((v, i) => {
               const { name, scoreStr, status } = getAnimeData(v)
               if (name === '') return
               return (
@@ -50,7 +45,7 @@ const Animes = ({ animes }: AnimesProps) => {
   )
 }
 
-export const getStaticProps = async () => {
+export const getStaticProps: GetStaticProps<ListPageProps> = async () => {
   const database = await getDatabase(animeDatabaseId, [
     {
       property: 'Score',
@@ -60,7 +55,8 @@ export const getStaticProps = async () => {
 
   return {
     props: {
-      animes: database,
+      data: database,
+      page: 'anime',
     },
   }
 }

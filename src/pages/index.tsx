@@ -1,16 +1,12 @@
-import { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints'
+import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
-import { Header } from 'src/components/Header'
 import { blogDatabaseId, ENV, getStorageURL } from 'src/config'
 import { getData, getDatabase } from 'src/lib/notion'
 import styles from 'src/styles/index.module.css'
+import { ListPageProps } from 'src/types/page'
 
-type PostsProps = {
-  posts: PageObjectResponse[]
-}
-
-export default function Home({ posts }: PostsProps) {
+export default function Home({ data }: ListPageProps) {
   return (
     <div>
       <Head>
@@ -23,10 +19,9 @@ export default function Home({ posts }: PostsProps) {
         <meta name="twitter:image" content={getStorageURL('kilroy.jpg')} />
       </Head>
       <main className={styles.container}>
-        <Header />
         <h2 className={styles.heading}>All Posts</h2>
         <ol className={styles.posts}>
-          {posts.map((post) => {
+          {data.map((post) => {
             const { slug, id, title, date, excerpt, icon } = getData(post)
             return (
               <li key={id} className={styles.post}>
@@ -48,7 +43,7 @@ export default function Home({ posts }: PostsProps) {
   )
 }
 
-export const getStaticProps = async () => {
+export const getStaticProps: GetStaticProps<ListPageProps> = async () => {
   let filter
   if (ENV === 'production') {
     filter = {
@@ -71,7 +66,8 @@ export const getStaticProps = async () => {
 
   return {
     props: {
-      posts: database,
+      data: database,
+      page: 'home',
     },
   }
 }
