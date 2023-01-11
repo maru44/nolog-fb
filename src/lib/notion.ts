@@ -35,10 +35,30 @@ export const getDatabase = async (
   let hasNext = true
   let results: PageObjectResponse[] = []
   let cursor = start_cursor
+  const finalFilter = filter
+    ? {
+        and: [
+          filter,
+          {
+            property: 'Name',
+            title: {
+              does_not_equal: '',
+              is_not_empty: true,
+            },
+          },
+        ],
+      }
+    : {
+        property: 'Name',
+        title: {
+          does_not_equal: '',
+          is_not_empty: true,
+        },
+      }
   while (hasNext) {
     const response = await notion.databases.query({
       database_id: databaseId,
-      filter: filter,
+      filter: finalFilter,
       sorts: sorts,
       start_cursor: cursor,
     })
@@ -102,8 +122,8 @@ export const getData = (page: PageObjectResponse): Blog => {
     category: string = '',
     tags: string[] = [],
     published: boolean = false
-  if (page.properties.Page.type === 'title') {
-    title = page.properties.Page.title[0].plain_text
+  if (page.properties.Name.type === 'title') {
+    title = page.properties.Name.title[0].plain_text
   }
   if (page.properties.Slug.type === 'rich_text') {
     slug = page.properties.Slug.rich_text[0].plain_text
@@ -148,8 +168,8 @@ export const getIndieData = (page: PageObjectResponse): Indie => {
     status: IndieStatus = 'unknown',
     images: string[] = [],
     url: string | null = null
-  if (page.properties.Page.type === 'title' && page.properties.Page.title.length > 0) {
-    title = page.properties.Page.title[0].plain_text
+  if (page.properties.Name.type === 'title') {
+    title = page.properties.Name.title[0].plain_text
   }
   if (page.properties.Slug.type === 'rich_text' && page.properties.Slug.rich_text.length > 0) {
     slug = page.properties.Slug.rich_text[0].plain_text

@@ -6,7 +6,7 @@ import { SkillIcon } from 'src/components/SkillIcon'
 import { getStorageURL, indieDatabaseId } from 'src/config'
 import { getDatabase, getIndieData } from 'src/lib/notion'
 import styles from 'src/styles/indies.module.css'
-import { ListPageProps } from 'src/types/page'
+import { ListPageProps, titleWithIcon } from 'src/types/page'
 
 const Indies = ({ data }: ListPageProps) => {
   return (
@@ -26,14 +26,10 @@ const Indies = ({ data }: ListPageProps) => {
           {data &&
             data.map((v) => {
               const { id, title, span, excerpt, icon, skills, url, slug, status } = getIndieData(v)
-              if (title === '') return
               return (
                 <li key={id} className={styles.post}>
                   <h3 className={styles.postTitle}>
-                    <Link href={`/indie/${slug}`}>
-                      {icon ? `${icon} ` : ''}
-                      {title}
-                    </Link>
+                    <Link href={`/indie/${slug}`}>{titleWithIcon(title, icon)}</Link>
                   </h3>
                   {status !== 'unknown' && (
                     <div className={styles.chip}>

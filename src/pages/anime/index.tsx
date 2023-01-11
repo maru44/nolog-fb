@@ -24,7 +24,6 @@ const Animes = ({ data }: ListPageProps) => {
           {data &&
             data.map((v, i) => {
               const { name, scoreStr, status } = getAnimeData(v)
-              if (name === '') return
               return (
                 <li key={i} className={styles.post}>
                   <div>

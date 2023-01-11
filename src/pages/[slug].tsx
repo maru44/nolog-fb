@@ -7,7 +7,7 @@ import { Block } from 'src/components/Block'
 import { blogDatabaseId, getStorageURL } from 'src/config'
 import { getBlocks, getData, getDatabase, getPageSlug } from 'src/lib/notion'
 import styles from 'src/styles/blog.module.css'
-import { Blog } from 'src/types/blog'
+import { Blog, blogTitle } from 'src/types/blog'
 import { DetailPageProps } from 'src/types/page'
 
 type PostProps = DetailPageProps<Blog>
@@ -30,10 +30,7 @@ export default function Post({ data, blocks }: PostProps) {
         <meta name="twitter:image" content={getStorageURL('kilroy.jpg')} />
       </Head>
       <article className={styles.container}>
-        <h1 className={styles.name}>
-          {data.icon ? `${data.icon} ` : ''}
-          {data.title}
-        </h1>
+        <h1 className={styles.name}>{blogTitle(data)} </h1>
         <p className={styles.excerpt}>{data.excerpt}</p>
         <section className={styles.content}>
           {blocks.map((block) => (

@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { blogDatabaseId, ENV, getStorageURL } from 'src/config'
 import { getData, getDatabase } from 'src/lib/notion'
 import styles from 'src/styles/index.module.css'
-import { ListPageProps } from 'src/types/page'
+import { ListPageProps, titleWithIcon } from 'src/types/page'
 
 export default function Home({ data }: ListPageProps) {
   return (
@@ -26,10 +26,7 @@ export default function Home({ data }: ListPageProps) {
             return (
               <li key={id} className={styles.post}>
                 <h3 className={styles.postTitle}>
-                  <Link href={`/${slug}`}>
-                    {icon ? `${icon} ` : ''}
-                    {title}
-                  </Link>
+                  <Link href={`/${slug}`}>{titleWithIcon(title, icon)}</Link>
                 </h3>
                 <p className={styles.postDescription}>{excerpt}</p>
                 <p className={styles.postDescription}>{date}</p>

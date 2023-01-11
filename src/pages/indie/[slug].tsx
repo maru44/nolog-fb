@@ -9,7 +9,7 @@ import { SkillIcon } from 'src/components/SkillIcon'
 import { getStorageURL, indieDatabaseId } from 'src/config'
 import { getBlocks, getDatabase, getIndieData, getPageSlug } from 'src/lib/notion'
 import styles from 'src/styles/indie.module.css'
-import { Indie } from 'src/types/indie'
+import { Indie, indieTitle } from 'src/types/indie'
 import { DetailPageProps } from 'src/types/page'
 
 type IndieProps = DetailPageProps<Indie>
@@ -31,10 +31,7 @@ export default function IndieDetail({ data, blocks }: IndieProps) {
         <meta name="twitter:image" content={getStorageURL('kilroy.jpg')} />
       </Head>
       <article className={styles.container}>
-        <h1 className={styles.name}>
-          {data.icon ? `${data.icon} ` : ''}
-          {data.title}
-        </h1>
+        <h1 className={styles.name}>{indieTitle(data)}</h1>
         {data.status !== 'unknown' && (
           <div className={styles.chip}>
             <Chip value={data.status} status={data.status === 'active' ? 'success' : 'disabled'} />

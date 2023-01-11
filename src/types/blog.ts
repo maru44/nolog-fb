@@ -1,3 +1,5 @@
+import { titleWithIcon } from 'src/types/page'
+
 export type Blog = {
   id: string
   slug: string
@@ -8,4 +10,8 @@ export type Blog = {
   tags: string[]
   published: boolean
   icon: string | null
+}
+
+export const blogTitle = (d: Blog) => {
+  return titleWithIcon(d.title, d.icon)
 }

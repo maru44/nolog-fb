@@ -1,3 +1,5 @@
+import { titleWithIcon } from 'src/types/page'
+
 export type IndieStatus = 'active' | 'inactive' | 'unknown'
 
 export type Indie = {
@@ -11,4 +13,8 @@ export type Indie = {
   images: string[]
   icon: string | null
   url: string | null
+}
+
+export const indieTitle = (d: Indie) => {
+  return titleWithIcon(d.title, d.icon)
 }
