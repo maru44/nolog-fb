@@ -9,7 +9,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <div className="container">
-        <Header page={pageProps.page} />
+        {pageProps.page && <Header page={pageProps.page} />}
         <Component {...pageProps} />
       </div>
       <hr className="divider" />

@@ -1,45 +1,16 @@
 import Link from 'next/link'
 import { useMemo } from 'react'
+import { HeaderMenu } from 'src/components/HeaderMenu'
 import { getStorageURL, GithubURL } from 'src/config'
 import styles from 'src/styles/components/header.module.css'
-import { ListPage } from 'src/types/page'
-
-type PathWithDesc = {
-  path: string
-  name: string
-  desc: string
-}
+import { ListPage, listPageInfo } from 'src/types/page'
 
 type HeaderProps = {
-  page?: ListPage
-}
-
-const pages: { [key in ListPage]: PathWithDesc } = {
-  home: {
-    path: '/',
-    name: 'Blog',
-    desc: 'A libertarian. An web engineer.',
-  },
-  indie: {
-    path: '/indie',
-    name: 'Indie',
-    desc: 'Indie Works',
-  },
-  anime: {
-    path: '/anime',
-    name: 'Anime',
-    desc: 'Just my personal opinion',
-  },
-}
-
-const pathWithDesc = (page?: ListPage) => {
-  if (!page) return
-  return pages[page]
+  page: ListPage
 }
 
 export const Header = ({ page }: HeaderProps) => {
-  const p = useMemo(() => pathWithDesc(page), [page])
-  const links = useMemo(() => Links(page), [page])
+  const p = useMemo(() => listPageInfo.find((v) => v.key === page), [page])
   if (!p) return null
 
   return (
@@ -56,19 +27,7 @@ export const Header = ({ page }: HeaderProps) => {
           </Link>
         </div>
       </div>
-      <div className={styles.menu}>{links}</div>
+      <HeaderMenu styles={styles} page={page} />
     </header>
   )
-}
-
-const Links = (page?: ListPage) => {
-  if (!page) return
-
-  return Object.entries(pages).map(([k, v]) => {
-    return (
-      <Link key={k} href={v.path} className={k === page ? styles.selected : undefined}>
-        {v.name}
-      </Link>
-    )
-  })
 }

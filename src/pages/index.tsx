@@ -64,7 +64,7 @@ export const getStaticProps: GetStaticProps<ListPageProps> = async () => {
   return {
     props: {
       data: database,
-      page: 'home',
+      page: 'blog',
     },
   }
 }
