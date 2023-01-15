@@ -21,6 +21,7 @@ export default function IndieDetail({ data, blocks }: IndieProps) {
     <div>
       <Head>
         <title>{data.title}</title>
+        <meta name="description" content={data.excerpt} />
         <meta property="og:title" content={data.title} />
         <meta property="og:type" content="article" />
         <meta property="og:description" content={data.excerpt} />
