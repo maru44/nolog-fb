@@ -54,6 +54,10 @@ export const SkillIcon = ({ skill }: SkillIconProps) => {
       break
     case 'sqlite':
       icon = <i className="devicon-sqlite-plain" />
+      break
+    case 'blender':
+      icon = <i className="devicon-blender-original" />
+      break
   }
   if (!!icon) {
     return (
