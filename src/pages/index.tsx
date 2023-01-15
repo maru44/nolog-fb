@@ -1,10 +1,11 @@
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
-import { blogDatabaseId, ENV, getStorageURL } from 'src/config'
+import { blogDatabaseId, ENV, kilroyPNG } from 'src/config'
 import { getData, getDatabase } from 'src/lib/notion'
 import styles from 'src/styles/index.module.css'
-import { ListPageProps, titleWithIcon } from 'src/types/page'
+import { blogTitle } from 'src/types/blog'
+import { ListPageProps } from 'src/types/page'
 
 export default function Home({ data }: ListPageProps) {
   return (
@@ -13,24 +14,24 @@ export default function Home({ data }: ListPageProps) {
         <title>Maru</title>
         <meta property="og:title" content="Maru's Blog" />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content={getStorageURL('kilroy.jpg')} />
+        <meta property="og:image" content={kilroyPNG} />
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content="Maru's Blog" />
-        <meta name="twitter:image" content={getStorageURL('kilroy.jpg')} />
+        <meta name="twitter:image" content={kilroyPNG} />
       </Head>
       <main className={styles.container}>
         <h2 className={styles.heading}>All Posts</h2>
         <ol className={styles.posts}>
           {data.map((post) => {
-            const { slug, id, title, date, excerpt, icon } = getData(post)
+            const blog = getData(post)
             return (
-              <li key={id} className={styles.post}>
+              <li key={blog.id} className={styles.post}>
                 <h3 className={styles.postTitle}>
-                  <Link href={`/${slug}`}>{titleWithIcon(title, icon)}</Link>
+                  <Link href={`/${blog.slug}`}>{blogTitle(blog)}</Link>
                 </h3>
-                <p className={styles.postDescription}>{excerpt}</p>
-                <p className={styles.postDescription}>{date}</p>
-                <Link href={`/${slug}`}>Read post →</Link>
+                <p className={styles.postDescription}>{blog.excerpt}</p>
+                <p className={styles.postDescription}>{blog.date}</p>
+                <Link href={`/${blog.slug}`}>Read post →</Link>
               </li>
             )
           })}

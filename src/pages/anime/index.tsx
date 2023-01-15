@@ -1,7 +1,7 @@
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import { Chip, ColorFromAnimeStatus } from 'src/components/Chip'
-import { animeDatabaseId, getStorageURL } from 'src/config'
+import { animeDatabaseId, kilroyPNG } from 'src/config'
 import { getAnimeData, getDatabase } from 'src/lib/notion'
 import styles from 'src/styles/animes.module.css'
 import { ListPageProps } from 'src/types/page'
@@ -13,10 +13,10 @@ const Animes = ({ data }: ListPageProps) => {
         <title>Maru&apos;s Anime</title>
         <meta property="og:title" content="Maru's Anime" />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content={getStorageURL('kilroy.jpg')} />
+        <meta property="og:image" content={kilroyPNG} />
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content="Maru's Anime" />
-        <meta name="twitter:image" content={getStorageURL('kilroy.jpg')} />
+        <meta name="twitter:image" content={kilroyPNG} />
       </Head>
       <main className={styles.container}>
         <h2 className={styles.heading}>Anime Scoring</h2>

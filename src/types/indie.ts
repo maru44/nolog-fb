@@ -10,7 +10,6 @@ export type Indie = {
   skills: string[]
   span: string
   status: IndieStatus
-  images: string[]
   icon: string | null
   url: string | null
 }

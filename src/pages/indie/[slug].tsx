@@ -6,7 +6,7 @@ import { ParsedUrlQuery } from 'querystring'
 import { Block } from 'src/components/Block'
 import { Chip } from 'src/components/Chip'
 import { SkillIcon } from 'src/components/SkillIcon'
-import { getStorageURL, indieDatabaseId } from 'src/config'
+import { indieDatabaseId, kilroyPNG } from 'src/config'
 import { getBlocks, getDatabase, getIndieData, getPageSlug } from 'src/lib/notion'
 import styles from 'src/styles/indie.module.css'
 import { Indie, indieTitle } from 'src/types/indie'
@@ -24,11 +24,11 @@ export default function IndieDetail({ data, blocks }: IndieProps) {
         <meta property="og:title" content={data.title} />
         <meta property="og:type" content="article" />
         <meta property="description" content={data.excerpt} />
-        <meta property="og:image" content={getStorageURL('kilroy.jpg')} />
+        <meta property="og:image" content={kilroyPNG} />
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content={data.title} />
         <meta name="twitter:description" content={data.excerpt} />
-        <meta name="twitter:image" content={getStorageURL('kilroy.jpg')} />
+        <meta name="twitter:image" content={kilroyPNG} />
       </Head>
       <article className={styles.container}>
         <h1 className={styles.name}>{indieTitle(data)}</h1>

@@ -166,7 +166,6 @@ export const getIndieData = (page: PageObjectResponse): Indie => {
     span: string = '',
     skills: string[] = [],
     status: IndieStatus = 'unknown',
-    images: string[] = [],
     url: string | null = null
   if (page.properties.Name.type === 'title') {
     title = page.properties.Name.title[0].plain_text
@@ -213,26 +212,13 @@ export const getIndieData = (page: PageObjectResponse): Indie => {
     const ts = page.properties.Skills.multi_select
     skills = ts.map((t) => t.name)
   }
-  if (page.properties.Images.type === 'files') {
-    images = page.properties.Images.files
-      .filter((v) => !!v.type)
-      .map((v) => {
-        switch (v.type) {
-          case 'file':
-            return v.file.url
-          case 'external':
-            return v.external.url
-        }
-        throw new Error(`must not reach here type: ${v.type}`)
-      })
-  }
   if (page.icon?.type === 'emoji') {
     icon = page.icon.emoji
   }
   if (page.properties.URL.type === 'url' && page.properties.URL.url !== null) {
     url = page.properties.URL.url
   }
-  return { id, icon, title, slug, excerpt, span, skills, status, images, url }
+  return { id, icon, title, slug, excerpt, span, skills, status, url }
 }
 
 // anime

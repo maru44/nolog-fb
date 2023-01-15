@@ -10,4 +10,6 @@ export const getStorageURL = (name: string) => {
   return `${publicStorage}/${name}`
 }
 
+export const kilroyPNG = getStorageURL('kilroy.jpg')
+
 export const GithubURL = `https://github.com/${process.env.NEXT_PUBLIC_GITHUB_ACCOUNT}`
