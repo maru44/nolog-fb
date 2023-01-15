@@ -22,7 +22,7 @@ export default function Post({ data, blocks }: PostProps) {
         <title>{data.title}</title>
         <meta property="og:title" content={data.title} />
         <meta property="og:type" content="article" />
-        <meta property="description" content={data.excerpt} />
+        <meta property="og:description" content={data.excerpt} />
         <meta property="og:image" content={kilroyPNG} />
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content={data.title} />
