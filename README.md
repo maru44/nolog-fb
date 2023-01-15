@@ -22,5 +22,6 @@ https://github.com/samuelkraft/notion-blog-nextjs
 
 ### Icons
 
-http://vorillaz.github.io/devicons/#/main
-https://devicon.dev/
+https://devicon.dev/ <br />
+http://vorillaz.github.io/devicons/#/main <br />
+https://www.svgrepo.com/

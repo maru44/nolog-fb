@@ -7,9 +7,6 @@ type SkillIconProps = {
 export const SkillIcon = ({ skill }: SkillIconProps) => {
   let icon: JSX.Element | undefined = undefined
   switch (skill) {
-    case 'GCP':
-      icon = <img src="/icons/google-cloud-platform.svg" width="30px" />
-      break
     case 'go':
       icon = <i className="devicon-go-original-wordmark" style={{ fontSize: '30px' }} />
       break
@@ -27,9 +24,6 @@ export const SkillIcon = ({ skill }: SkillIconProps) => {
       break
     case 'docker':
       icon = <i className="devicon-docker-plain" />
-      break
-    case 'AWS':
-      icon = <img src="/icons/aws.svg" width="30px" />
       break
     case 'PostgreSQL':
       icon = <i className="devicon-postgresql-plain" />
@@ -58,6 +52,29 @@ export const SkillIcon = ({ skill }: SkillIconProps) => {
     case 'blender':
       icon = <i className="devicon-blender-original" />
       break
+    case 'jQuery':
+      icon = <i className="devicon-jquery-plain" />
+      break
+    case 'Github Actions':
+      icon = <i className="devicon-github-original" />
+      break
+    case 'Vercel':
+      icon = <img src="/icons/logo-vercel-svgrepo-com.svg" width="24px" />
+      break
+    case 'Sentry':
+      icon = <img src="/icons/sentry-svgrepo-com.svg" width="24px" />
+      break
+    case 'GCP':
+      icon = <img src="/icons/google-cloud-platform.svg" width="30px" />
+      break
+    case 'vite':
+      icon = <img src="/icons/vite.svg" width="24px" />
+      break
+    case 'AWS':
+      icon = <img src="/icons/aws.svg" width="30px" />
+      break
+    case 'bottle':
+      icon = <img src="/icons/flask-round-svgrepo-com.svg" width="24px" />
   }
   if (!!icon) {
     return (
