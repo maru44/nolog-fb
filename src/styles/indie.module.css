@@ -2,13 +2,13 @@
   white-space: pre-wrap;
 }
 
-.container h1 {
-  font-size: 32px;
-}
-
-.container img {
+.content img {
   width: 100%;
   height: auto;
+}
+
+.container h1 {
+  font-size: 32px;
 }
 
 .container figure {
