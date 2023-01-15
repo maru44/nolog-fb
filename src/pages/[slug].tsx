@@ -10,9 +10,9 @@ import styles from 'src/styles/blog.module.css'
 import { Blog, blogTitle } from 'src/types/blog'
 import { DetailPageProps } from 'src/types/page'
 
-type BlogProps = DetailPageProps<Blog>
+type PostProps = DetailPageProps<Blog>
 
-export default function Blog({ data, blocks }: BlogProps) {
+export default function Post({ data, blocks }: PostProps) {
   if (!blocks) {
     return <></>
   }
@@ -58,7 +58,7 @@ interface IParams extends ParsedUrlQuery {
   slug: string
 }
 
-export const getStaticProps: GetStaticProps<BlogProps, IParams> = async (context) => {
+export const getStaticProps: GetStaticProps<PostProps, IParams> = async (context) => {
   const { slug } = context.params!
   const database = (await getDatabase(blogDatabaseId)) as PageObjectResponse[]
   const page = database.find((page) => getPageSlug(page) === slug)
