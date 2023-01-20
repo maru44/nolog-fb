@@ -16,7 +16,7 @@ export const Header = ({ page }: HeaderProps) => {
   return (
     <header className={styles.header}>
       <div className={styles.logos}>
-        <img src={kilroyPNG} width="50%" />
+        <img src={kilroyPNG} alt="top image" width="50%" />
       </div>
       <h1>Maru</h1>
       <p>{p.desc}</p>
