@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import { Fragment } from 'react'
 import { Text } from 'src/components/Text'
@@ -92,7 +93,7 @@ export const Block = ({ block, styles }: BlockProps) => {
       const caption = block.image.caption ? block.image.caption[0]?.plain_text : ''
       return (
         <figure>
-          <img src={src} alt={caption} />
+          <Image src={src} alt={caption ?? src} width={0} height={0} sizes="100%" loading="lazy" />
           {caption && <figcaption>{caption}</figcaption>}
         </figure>
       )
