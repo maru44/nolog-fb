@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ['react-app', 'react-app/jest', 'plugin:prettier/recommended'],
+  extends: ['react-app', 'react-app/jest', 'plugin:prettier/recommended', 'next'],
   plugins: ['prettier'],
   rules: {
     'no-restricted-imports': ['error', { patterns: ['./', '../', '.'] }],
