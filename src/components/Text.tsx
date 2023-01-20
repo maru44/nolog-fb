@@ -42,6 +42,7 @@ export const Text = ({ texts, styles }: TextProps) => {
         )
       }
     }
+    return null
   })
   return <>{elements}</>
 }

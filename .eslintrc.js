@@ -5,5 +5,6 @@ module.exports = {
     'no-restricted-imports': ['error', { patterns: ['./', '../', '.'] }],
     'prettier/prettier': 'error',
     'react-hooks/exhaustive-deps': ['error'],
+    '@next/next/no-img-element': 'off'
   },
 }

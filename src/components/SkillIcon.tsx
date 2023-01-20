@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import styles from 'src/styles/components/skillicon.module.css'
 
 type SkillIconProps = {
@@ -60,22 +59,22 @@ export const SkillIcon = ({ skill }: SkillIconProps) => {
       icon = <i className="devicon-github-original" />
       break
     case 'Vercel':
-      icon = <Image src="/icons/logo-vercel-svgrepo-com.svg" alt="vercel-icon.svg" width={24} height={24} />
+      icon = <img src="/icons/logo-vercel-svgrepo-com.svg" width="24px" />
       break
     case 'Sentry':
-      icon = <Image src="/icons/sentry-svgrepo-com.svg" alt="sentry.svg" width={24} height={24} />
+      icon = <img src="/icons/sentry-svgrepo-com.svg" width="24px" />
       break
     case 'GCP':
-      icon = <Image src="/icons/google-cloud-platform.svg" alt="gcp.svg" width={30} height={30} />
+      icon = <img src="/icons/google-cloud-platform.svg" width="30px" />
       break
     case 'vite':
-      icon = <Image src="/icons/vite.svg" alt="vite.svg" width={24} height={24} />
+      icon = <img src="/icons/vite.svg" width="24px" />
       break
     case 'AWS':
-      icon = <Image src="/icons/aws.svg" alt="aws.svg" width={30} height={30} />
+      icon = <img src="/icons/aws.svg" width="30px" />
       break
     case 'bottle':
-      icon = <Image src="/icons/flask-round-svgrepo-com.svg" alt="bottle.svg" width={24} height={24} />
+      icon = <img src="/icons/flask-round-svgrepo-com.svg" width="24px" />
   }
   if (!!icon) {
     return (

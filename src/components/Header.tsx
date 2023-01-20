@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import Link from 'next/link'
 import { useMemo } from 'react'
 import { HeaderMenu } from 'src/components/HeaderMenu'
@@ -17,7 +16,7 @@ export const Header = ({ page }: HeaderProps) => {
   return (
     <header className={styles.header}>
       <div className={styles.logos}>
-        <Image src={kilroyPNG} alt={kilroyPNG} width={0} height={0} sizes="100%" priority={true} />
+        <img src={kilroyPNG} width="50%" />
       </div>
       <h1>Maru</h1>
       <p>{p.desc}</p>
