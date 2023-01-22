@@ -19,7 +19,7 @@ export const Chip = ({ value, status }: ChipProps) => {
 
 export const ColorFromAnimeStatus = (status: AnimeStatus): ChipLikeStatus => {
   switch (status) {
-    case 'multiple complete':
+    case 'many':
       return 'love'
     case 'complete':
       return 'like'
