@@ -20,6 +20,9 @@
     "react-dom": "18.2.0",
     "typescript": "4.9.4"
   },
+  "resolutions": {
+    "@types/react": "17.0.40"
+  },
   "devDependencies": {
     "@next/eslint-plugin-next": "^13.1.3",
     "@notionhq/client": "^2.2.3",
