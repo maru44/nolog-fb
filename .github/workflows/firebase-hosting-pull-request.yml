@@ -11,6 +11,7 @@ env:
   NEXT_PUBLIC_PUBLIC_STORAGE: ${{ secrets.PUBLIC_STORAGE }}
   NEXT_PUBLIC_GITHUB_ACCOUNT: ${{ secrets.NEXT_PUBLIC_GITHUB_ACCOUNT }}
   NEXT_PUBLIC_GA_ID: ${{ secrets.NEXT_PUBLIC_GA_ID }}
+  NEXT_PUBLIC_BASE_URL: ${{ secrets.NEXT_PUBLIC_BASE_URL }}
 jobs:
   build_and_preview:
     if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
