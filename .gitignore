@@ -38,3 +38,6 @@ next-env.d.ts
 # mine
 .env.*
 !.env.example
+
+public/robots.txt
+public/sitemap*.xml
