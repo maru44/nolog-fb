@@ -42,8 +42,7 @@ export default function Home({ data }: ListPageProps) {
   )
 }
 
-export const getStaticProps: GetStaticProps<ListPageProps> = async (context) => {
-  context.locale
+export const getStaticProps: GetStaticProps<ListPageProps> = async () => {
   let filter
   if (ENV === 'production') {
     filter = {
