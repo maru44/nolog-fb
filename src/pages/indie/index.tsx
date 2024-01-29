@@ -3,7 +3,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { Chip } from 'src/components/Chip'
 import { SkillIcon } from 'src/components/SkillIcon'
-import { indieDatabaseId, kilroyPNG } from 'src/config'
+import { baseURL, indieDatabaseId, kilroyPNG } from 'src/config'
 import { getDatabase, getIndieData } from 'src/lib/notion'
 import styles from 'src/styles/indies.module.css'
 import { indieTitle } from 'src/types/indie'
@@ -20,6 +20,7 @@ const Indies = ({ data }: ListPageProps) => {
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content="Maru's Indie Works" />
         <meta name="twitter:image" content={kilroyPNG} />
+        <link rel="canonical" href={`${baseURL}/indie/`} />
       </Head>
       <main className={styles.container}>
         <h2 className={styles.heading}>Web Apps</h2>

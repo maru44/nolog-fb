@@ -13,3 +13,5 @@ export const getStorageURL = (name: string) => {
 export const kilroyPNG = getStorageURL('kilroy.jpg')
 
 export const GithubURL = `https://github.com/${process.env.NEXT_PUBLIC_GITHUB_ACCOUNT}`
+
+export const baseURL = process.env.NEXT_PUBLIC_BASE_URL ?? 'http://localhost:3000'

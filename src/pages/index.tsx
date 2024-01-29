@@ -1,7 +1,7 @@
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
-import { blogDatabaseId, ENV, kilroyPNG } from 'src/config'
+import { baseURL, blogDatabaseId, ENV, kilroyPNG } from 'src/config'
 import { getData, getDatabase } from 'src/lib/notion'
 import styles from 'src/styles/index.module.css'
 import { blogTitle } from 'src/types/blog'
@@ -18,6 +18,7 @@ export default function Home({ data }: ListPageProps) {
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content="Maru's Blog" />
         <meta name="twitter:image" content={kilroyPNG} />
+        <link rel="canonical" href={`${baseURL}/`} />
       </Head>
       <main className={styles.container}>
         <h2 className={styles.heading}>All Posts</h2>
@@ -41,7 +42,8 @@ export default function Home({ data }: ListPageProps) {
   )
 }
 
-export const getStaticProps: GetStaticProps<ListPageProps> = async () => {
+export const getStaticProps: GetStaticProps<ListPageProps> = async (context) => {
+  context.locale
   let filter
   if (ENV === 'production') {
     filter = {

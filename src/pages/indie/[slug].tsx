@@ -6,7 +6,7 @@ import { ParsedUrlQuery } from 'querystring'
 import { Block } from 'src/components/Block'
 import { Chip } from 'src/components/Chip'
 import { SkillIcon } from 'src/components/SkillIcon'
-import { indieDatabaseId, kilroyPNG } from 'src/config'
+import { baseURL, indieDatabaseId, kilroyPNG } from 'src/config'
 import { getBlocks, getDatabase, getIndieData, getPageSlug } from 'src/lib/notion'
 import styles from 'src/styles/indie.module.css'
 import { Indie, indieTitle } from 'src/types/indie'
@@ -30,6 +30,7 @@ export default function IndieDetail({ data, blocks }: IndieProps) {
         <meta name="twitter:title" content={data.title} />
         <meta name="twitter:description" content={data.excerpt} />
         <meta name="twitter:image" content={kilroyPNG} />
+        <link rel="canonical" href={`${baseURL}/indie/${data.slug}/`} />
         {data.icon && (
           <link
             rel="shortcut icon"

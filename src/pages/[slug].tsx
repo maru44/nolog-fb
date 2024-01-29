@@ -4,7 +4,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { ParsedUrlQuery } from 'querystring'
 import { Block } from 'src/components/Block'
-import { blogDatabaseId, kilroyPNG } from 'src/config'
+import { baseURL, blogDatabaseId, kilroyPNG } from 'src/config'
 import { getBlocks, getData, getDatabase, getPageSlug } from 'src/lib/notion'
 import styles from 'src/styles/blog.module.css'
 import { Blog, blogTitle } from 'src/types/blog'
@@ -29,6 +29,7 @@ export default function Post({ data, blocks }: PostProps) {
         <meta name="twitter:title" content={data.title} />
         <meta name="twitter:description" content={data.excerpt} />
         <meta name="twitter:image" content={kilroyPNG} />
+        <link rel="canonical" href={`${baseURL}/${data.slug}/`} />
         {data.icon && (
           <link
             rel="shortcut icon"
