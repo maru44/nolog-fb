@@ -4,7 +4,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { ParsedUrlQuery } from 'querystring'
 import { Block } from 'src/components/Block'
-import { baseURL, blogDatabaseId, kilroyPNG } from 'src/config'
+import { baseURL, blogDatabaseId, ENV, kilroyPNG } from 'src/config'
 import { getBlocks, getData, getDatabase, getPageSlug } from 'src/lib/notion'
 import styles from 'src/styles/blog.module.css'
 import { Blog, blogTitle } from 'src/types/blog'
@@ -71,10 +71,19 @@ export const getStaticProps: GetStaticProps<PostProps, IParams> = async (context
   const page = database.find((page) => getPageSlug(page) === slug)
   const blocks = await getBlocks(page!.id)
 
+  const data = getData(page!)
+  // publishされていないものは隠す
+  if (ENV === 'production' && !data.published) {
+    return {
+      notFound: true,
+      revalidate: true,
+    }
+  }
+
   return {
     props: {
-      data: getData(page!),
-      blocks: blocks,
+      data,
+      blocks,
     },
   }
 }
