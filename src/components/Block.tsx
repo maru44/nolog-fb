@@ -92,7 +92,7 @@ export const Block = ({ block, styles }: BlockProps) => {
       const caption = block.image.caption ? block.image.caption[0]?.plain_text : ''
       return (
         <figure>
-          <img src={src} alt={caption} />
+          <img src={src} alt={caption} loading="lazy" />
           {caption && <figcaption>{caption}</figcaption>}
         </figure>
       )
