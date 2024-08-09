@@ -11,6 +11,8 @@ export const getStorageURL = (name: string) => {
 }
 
 export const kilroyPNG = getStorageURL('kilroy.jpg')
+export const shiroJPG = getStorageURL('shiro_illust.jpg')
+export const shiroJPGFlat = getStorageURL('shiro_illust_flat.jpg')
 
 export const GithubURL = `https://github.com/${process.env.NEXT_PUBLIC_GITHUB_ACCOUNT}`
 

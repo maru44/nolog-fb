@@ -6,7 +6,7 @@ import { ParsedUrlQuery } from 'querystring'
 import { Block } from 'src/components/Block'
 import { Chip } from 'src/components/Chip'
 import { SkillIcon } from 'src/components/SkillIcon'
-import { baseURL, indieDatabaseId, kilroyPNG } from 'src/config'
+import { baseURL, indieDatabaseId, shiroJPGFlat } from 'src/config'
 import { getBlocks, getDatabase, getIndieData, getPageSlug } from 'src/lib/notion'
 import styles from 'src/styles/indie.module.css'
 import { Indie, indieTitle } from 'src/types/indie'
@@ -25,11 +25,11 @@ export default function IndieDetail({ data, blocks }: IndieProps) {
         <meta property="og:title" content={data.title} />
         <meta property="og:type" content="article" />
         <meta property="og:description" content={data.excerpt} />
-        <meta property="og:image" content={kilroyPNG} />
+        <meta property="og:image" content={shiroJPGFlat} />
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content={data.title} />
         <meta name="twitter:description" content={data.excerpt} />
-        <meta name="twitter:image" content={kilroyPNG} />
+        <meta name="twitter:image" content={shiroJPGFlat} />
         <link rel="canonical" href={`${baseURL}/indie/${data.slug}/`} />
         {data.icon && (
           <link

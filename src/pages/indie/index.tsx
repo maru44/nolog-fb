@@ -3,7 +3,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { Chip } from 'src/components/Chip'
 import { SkillIcon } from 'src/components/SkillIcon'
-import { baseURL, indieDatabaseId, kilroyPNG } from 'src/config'
+import { baseURL, indieDatabaseId, shiroJPGFlat } from 'src/config'
 import { getDatabase, getIndieData } from 'src/lib/notion'
 import styles from 'src/styles/indies.module.css'
 import { indieTitle } from 'src/types/indie'
@@ -16,10 +16,10 @@ const Indies = ({ data }: ListPageProps) => {
         <title>Maru&apos;s Indie Works</title>
         <meta property="og:title" content="Maru's Indie Works" />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content={kilroyPNG} />
+        <meta property="og:image" content={shiroJPGFlat} />
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content="Maru's Indie Works" />
-        <meta name="twitter:image" content={kilroyPNG} />
+        <meta name="twitter:image" content={shiroJPGFlat} />
         <link rel="canonical" href={`${baseURL}/indie/`} />
       </Head>
       <main className={styles.container}>

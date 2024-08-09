@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { useMemo } from 'react'
 import { HeaderMenu } from 'src/components/HeaderMenu'
-import { GithubURL, kilroyPNG } from 'src/config'
+import { GithubURL, shiroJPGFlat } from 'src/config'
 import styles from 'src/styles/components/header.module.css'
 import { ListPage, listPageInfo } from 'src/types/page'
 
@@ -16,7 +16,7 @@ export const Header = ({ page }: HeaderProps) => {
   return (
     <header className={styles.header}>
       <div className={styles.logos}>
-        <img src={kilroyPNG} alt="top" width="50%" />
+        <img src={shiroJPGFlat} alt="top" width="50%" />
       </div>
       <h1>Maru</h1>
       <p>{p.desc}</p>

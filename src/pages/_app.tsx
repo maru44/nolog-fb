@@ -11,7 +11,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <link rel="canonical" href="https://maru44.web.app" />
-        <link rel="shortcut icon" type="image/jpg" href="/kilroy_sq.jpg" />
+        <link rel="shortcut icon" type="image/jpg" href="/shiro_illust_sq.jpg" />
       </Head>
       <div className="container">
         {pageProps.page && <Header page={pageProps.page} />}

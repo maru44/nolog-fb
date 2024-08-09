@@ -1,7 +1,7 @@
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
-import { baseURL, blogDatabaseId, ENV, kilroyPNG } from 'src/config'
+import { baseURL, blogDatabaseId, ENV, shiroJPGFlat } from 'src/config'
 import { getData, getDatabase } from 'src/lib/notion'
 import styles from 'src/styles/index.module.css'
 import { blogTitle } from 'src/types/blog'
@@ -14,10 +14,10 @@ export default function Home({ data }: ListPageProps) {
         <title>Maru</title>
         <meta property="og:title" content="Maru's Blog" />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content={kilroyPNG} />
+        <meta property="og:image" content={shiroJPGFlat} />
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content="Maru's Blog" />
-        <meta name="twitter:image" content={kilroyPNG} />
+        <meta name="twitter:image" content={shiroJPGFlat} />
         <link rel="canonical" href={`${baseURL}/`} />
       </Head>
       <main className={styles.container}>
