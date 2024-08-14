@@ -49,22 +49,22 @@
   margin-top: 60px;
 }
 
-.bold {
+.content .bold {
   font-weight: bold;
 }
 
-.code {
+.content .code {
   font-family: monospace;
   background-color: rgb(242, 242, 242);
   padding: 2px 4px;
   border-radius: 2px;
 }
 
-.italic {
+.content .italic {
   font-style: italic;
 }
 
-.pre {
+.content .pre {
   background-color: rgb(242, 242, 242);
   padding: 2px 4px;
   margin: 20px 0;
@@ -73,55 +73,59 @@
   overflow: auto;
 }
 
-.code_block {
+.content .code_block {
   padding: 20px;
   font-family: monospace;
   display: flex;
   flex-wrap: wrap;
 }
 
-.file {
+.content .file {
   padding: 2px 4px;
   text-decoration: none;
 }
 
-.file a {
+.content .file a {
   color: inherit;
 }
 
-.file:hover {
+.content .file:hover {
   background: rgba(55, 53, 47, 0.08);
   cursor: pointer;
   border-radius: 2px;
 }
 
-.italic {
+.content .italic {
   font-style: italic;
 }
 
-.strikethrough {
+.content .strikethrough {
   text-decoration: line-through;
 }
 
-.underline {
+.content .underline {
   text-decoration: underline;
 }
 
-.bookmark {
+.content .bookmark {
   display: block;
   margin-bottom: 10px;
 }
 
+.content h2 {
+  margin: 80px 0 20px 0;
+}
+
 @media (prefers-color-scheme: dark) {
-  .code {
+  .content .code {
     background-color: rgb(15, 8, 28);
   }
-  .file:hover {
+  .content .file:hover {
     background: rgba(255, 255, 255, 0.1);
     cursor: pointer;
     border-radius: 2px;
   }
-  .pre {
+  .content .pre {
     background-color: rgb(15, 8, 28);
   }
 }
