@@ -1,14 +1,14 @@
-import { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints'
-import { GetStaticProps } from 'next'
+import type { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints'
+import type { GetStaticProps } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
-import { ParsedUrlQuery } from 'querystring'
+import type { ParsedUrlQuery } from 'querystring'
 import { Block } from 'src/components/Block'
 import { baseURL, blogDatabaseId, ENV, shiroJPGFlat } from 'src/config'
 import { getBlocks, getData, getDatabase, getPageSlug } from 'src/lib/notion'
 import styles from 'src/styles/blog.module.css'
-import { Blog, blogTitle } from 'src/types/blog'
-import { DetailPageProps } from 'src/types/page'
+import { type Blog, blogTitle } from 'src/types/blog'
+import type { DetailPageProps } from 'src/types/page'
 
 type PostProps = DetailPageProps<Blog>
 
@@ -65,7 +65,9 @@ interface IParams extends ParsedUrlQuery {
   slug: string
 }
 
-export const getStaticProps: GetStaticProps<PostProps, IParams> = async (context) => {
+export const getStaticProps: GetStaticProps<PostProps, IParams> = async (
+  context,
+) => {
   const { slug } = context.params!
   const database = (await getDatabase(blogDatabaseId)) as PageObjectResponse[]
   const page = database.find((page) => getPageSlug(page) === slug)
@@ -76,7 +78,6 @@ export const getStaticProps: GetStaticProps<PostProps, IParams> = async (context
   if (ENV === 'production' && !data.published) {
     return {
       notFound: true,
-      revalidate: true,
     }
   }
 

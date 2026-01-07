@@ -41,7 +41,12 @@ export const Block = ({ block, styles }: BlockProps) => {
         return (
           <li>
             <Text texts={block.bulleted_list_item.rich_text} styles={styles} />
-            <ul>{block.children && block.children.map((c, i) => <Block key={i} block={c} styles={styles} />)}</ul>
+            <ul>
+              {block.children &&
+                block.children.map((c, i) => (
+                  <Block key={i} block={c} styles={styles} />
+                ))}
+            </ul>
           </li>
         )
       }
@@ -55,7 +60,12 @@ export const Block = ({ block, styles }: BlockProps) => {
         return (
           <li>
             <Text texts={block.numbered_list_item.rich_text} styles={styles} />
-            <ol>{block.children && block.children.map((c, i) => <Block key={i} block={c} styles={styles} />)}</ol>
+            <ol>
+              {block.children &&
+                block.children.map((c, i) => (
+                  <Block key={i} block={c} styles={styles} />
+                ))}
+            </ol>
           </li>
         )
       }
@@ -68,7 +78,12 @@ export const Block = ({ block, styles }: BlockProps) => {
       return (
         <div>
           <label htmlFor={id}>
-            <input type="checkbox" id={id} defaultChecked={block.to_do.checked} /> <Text texts={block.to_do.rich_text} styles={styles} />
+            <input
+              type="checkbox"
+              id={id}
+              defaultChecked={block.to_do.checked}
+            />{' '}
+            <Text texts={block.to_do.rich_text} styles={styles} />
           </label>
         </div>
       )
@@ -80,7 +95,9 @@ export const Block = ({ block, styles }: BlockProps) => {
           </summary>
           <>
             {block.children?.map((block) => (
-              <Fragment key={block.id}>{<Block block={block} styles={styles} />}</Fragment>
+              <Fragment key={block.id}>
+                {<Block block={block} styles={styles} />}
+              </Fragment>
             ))}
           </>
         </details>
@@ -88,8 +105,13 @@ export const Block = ({ block, styles }: BlockProps) => {
     case 'child_page':
       return <p>{block.child_page.title}</p>
     case 'image': {
-      const src = block.image.type === 'external' ? block.image.external.url : block.image.file.url
-      const caption = block.image.caption ? block.image.caption[0]?.plain_text : ''
+      const src =
+        block.image.type === 'external'
+          ? block.image.external.url
+          : block.image.file.url
+      const caption = block.image.caption
+        ? block.image.caption[0]?.plain_text
+        : ''
       return (
         <figure>
           <img src={src} alt={caption} loading="lazy" />
@@ -114,10 +136,15 @@ export const Block = ({ block, styles }: BlockProps) => {
         </pre>
       )
     case 'file':
-      const src_file = block.file.type === 'external' ? block.file.external.url : block.file.file.url
+      const src_file =
+        block.file.type === 'external'
+          ? block.file.external.url
+          : block.file.file.url
       const splitSourceArray = src_file.split('/')
       const lastElementInArray = splitSourceArray[splitSourceArray.length - 1]
-      const caption_file = block.file.caption ? block.file.caption[0]?.plain_text : ''
+      const caption_file = block.file.caption
+        ? block.file.caption[0]?.plain_text
+        : ''
       return (
         <figure>
           <div className={styles.file}>
@@ -137,7 +164,10 @@ export const Block = ({ block, styles }: BlockProps) => {
         </a>
       )
     case 'video': {
-      const src = block.video.type === 'external' ? block.video.external.url : block.video.file.url
+      const src =
+        block.video.type === 'external'
+          ? block.video.external.url
+          : block.video.file.url
       return (
         <div className={styles.iframeWrapper}>
           <iframe src={src} title={src} />
@@ -145,7 +175,9 @@ export const Block = ({ block, styles }: BlockProps) => {
       )
     }
     default:
-      console.error(`❌ Unsupported block (${type === 'unsupported' ? 'unsupported by Notion API' : type})`)
+      console.error(
+        `❌ Unsupported block (${type === 'unsupported' ? 'unsupported by Notion API' : type})`,
+      )
       return <></>
   }
 }

@@ -30,7 +30,7 @@ export const getDatabase = async (
       equals: boolean
     }
   },
-  start_cursor?: string
+  start_cursor?: string,
 ) => {
   let hasNext = true
   let results: PageObjectResponse[] = []
@@ -72,7 +72,9 @@ export const getDatabase = async (
 }
 
 export const getPageSlug = (page: PageObjectResponse) => {
-  return page.properties.Slug.type === 'rich_text' ? page.properties.Slug.rich_text[0].plain_text : ''
+  return page.properties.Slug.type === 'rich_text'
+    ? page.properties.Slug.rich_text[0].plain_text
+    : ''
 }
 
 export const getPage = async (pageId: string) => {
@@ -128,7 +130,10 @@ export const getData = (page: PageObjectResponse): Blog => {
   if (page.properties.Slug.type === 'rich_text') {
     slug = page.properties.Slug.rich_text[0].plain_text
   }
-  if (page.properties.Excerpt.type === 'rich_text' && page.properties.Excerpt.rich_text.length > 0) {
+  if (
+    page.properties.Excerpt.type === 'rich_text' &&
+    page.properties.Excerpt.rich_text.length > 0
+  ) {
     excerpt = page.properties.Excerpt.rich_text[0].plain_text
   }
   if (page.properties.Published.type === 'checkbox') {
@@ -143,7 +148,10 @@ export const getData = (page: PageObjectResponse): Blog => {
       })
     }
   }
-  if (page.properties.Category.type === 'select' && page.properties.Category.select) {
+  if (
+    page.properties.Category.type === 'select' &&
+    page.properties.Category.select
+  ) {
     category = page.properties.Category.select.name
   }
   if (page.properties.Tags.type === 'multi_select') {
@@ -170,20 +178,29 @@ export const getIndieData = (page: PageObjectResponse): Indie => {
   if (page.properties.Name.type === 'title') {
     title = page.properties.Name.title[0].plain_text
   }
-  if (page.properties.Slug.type === 'rich_text' && page.properties.Slug.rich_text.length > 0) {
+  if (
+    page.properties.Slug.type === 'rich_text' &&
+    page.properties.Slug.rich_text.length > 0
+  ) {
     slug = page.properties.Slug.rich_text[0].plain_text
   }
-  if (page.properties.Excerpt.type === 'rich_text' && page.properties.Excerpt.rich_text.length > 0) {
+  if (
+    page.properties.Excerpt.type === 'rich_text' &&
+    page.properties.Excerpt.rich_text.length > 0
+  ) {
     excerpt = page.properties.Excerpt.rich_text[0].plain_text
   }
   if (page.properties.Span.type === 'date' && page.properties.Span.date) {
     let start: string | undefined, end: string | undefined
     if (!!page.properties.Span.date.start) {
-      start = new Date(page.properties.Span.date.start).toLocaleString('en-US', {
-        month: 'short',
-        day: '2-digit',
-        year: 'numeric',
-      })
+      start = new Date(page.properties.Span.date.start).toLocaleString(
+        'en-US',
+        {
+          month: 'short',
+          day: '2-digit',
+          year: 'numeric',
+        },
+      )
     }
     if (!!page.properties.Span.date.end) {
       end = new Date(page.properties.Span.date.end).toLocaleString('en-US', {
@@ -198,7 +215,10 @@ export const getIndieData = (page: PageObjectResponse): Indie => {
       span = `${start ?? ''} - ${end ?? ''}`
     }
   }
-  if (page.properties.Status.type === 'select' && page.properties.Status.select) {
+  if (
+    page.properties.Status.type === 'select' &&
+    page.properties.Status.select
+  ) {
     switch (page.properties.Status.select.name as IndieStatus) {
       case 'active':
         status = 'active'
@@ -228,10 +248,16 @@ export const getAnimeData = (page: PageObjectResponse): Anime => {
     status: AnimeStatus = 'unknown',
     score: number | null = null,
     scoreStr: string = '-'
-  if (page.properties.Name.type === 'title' && page.properties.Name.title.length > 0) {
+  if (
+    page.properties.Name.type === 'title' &&
+    page.properties.Name.title.length > 0
+  ) {
     name = page.properties.Name.title[0].plain_text
   }
-  if (page.properties.Status.type === 'select' && page.properties.Status.select) {
+  if (
+    page.properties.Status.type === 'select' &&
+    page.properties.Status.select
+  ) {
     status = page.properties.Status.select.name as AnimeStatus
   }
   if (page.properties.Score.type === 'number') {

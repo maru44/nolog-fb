@@ -31,11 +31,18 @@ const Indies = ({ data }: ListPageProps) => {
               return (
                 <li key={indie.id} className={styles.post}>
                   <h3 className={styles.postTitle}>
-                    <Link href={`/indie/${indie.slug}`}>{indieTitle(indie)}</Link>
+                    <Link href={`/indie/${indie.slug}`}>
+                      {indieTitle(indie)}
+                    </Link>
                   </h3>
                   {indie.status !== 'unknown' && (
                     <div className={styles.chip}>
-                      <Chip value={indie.status} status={indie.status === 'active' ? 'success' : 'disabled'} />
+                      <Chip
+                        value={indie.status}
+                        status={
+                          indie.status === 'active' ? 'success' : 'disabled'
+                        }
+                      />
                     </div>
                   )}
                   <p className={styles.postDescription}>{indie.excerpt}</p>

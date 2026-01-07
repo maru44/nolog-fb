@@ -1,4 +1,9 @@
-export type AnimeStatus = 'complete' | 'many' | 'watching' | 'abandon' | 'unknown'
+export type AnimeStatus =
+  | 'complete'
+  | 'many'
+  | 'watching'
+  | 'abandon'
+  | 'unknown'
 
 export type Anime = {
   id: string

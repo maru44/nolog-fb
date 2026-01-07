@@ -60,7 +60,7 @@ export const getStaticProps: GetStaticProps<ListPageProps> = async () => {
         direction: 'descending',
       },
     ],
-    filter
+    filter,
   )
 
   return {

@@ -7,7 +7,12 @@ import { Block } from 'src/components/Block'
 import { Chip } from 'src/components/Chip'
 import { SkillIcon } from 'src/components/SkillIcon'
 import { baseURL, indieDatabaseId, shiroJPGFlat } from 'src/config'
-import { getBlocks, getDatabase, getIndieData, getPageSlug } from 'src/lib/notion'
+import {
+  getBlocks,
+  getDatabase,
+  getIndieData,
+  getPageSlug,
+} from 'src/lib/notion'
 import styles from 'src/styles/indie.module.css'
 import { Indie, indieTitle } from 'src/types/indie'
 import { DetailPageProps } from 'src/types/page'
@@ -42,7 +47,10 @@ export default function IndieDetail({ data, blocks }: IndieProps) {
         <h1 className={styles.name}>{indieTitle(data)}</h1>
         {data.status !== 'unknown' && (
           <div className={styles.chip}>
-            <Chip value={data.status} status={data.status === 'active' ? 'success' : 'disabled'} />
+            <Chip
+              value={data.status}
+              status={data.status === 'active' ? 'success' : 'disabled'}
+            />
           </div>
         )}
         <p className={styles.excerpt}>{data.excerpt}</p>
@@ -92,7 +100,9 @@ interface IParams extends ParsedUrlQuery {
   slug: string
 }
 
-export const getStaticProps: GetStaticProps<IndieProps, IParams> = async (context) => {
+export const getStaticProps: GetStaticProps<IndieProps, IParams> = async (
+  context,
+) => {
   const { slug } = context.params!
   const database = (await getDatabase(indieDatabaseId)) as PageObjectResponse[]
   const page = database.find((page) => getPageSlug(page) === slug)

@@ -11,7 +11,10 @@ type ChipProps = {
 
 export const Chip = ({ value, status }: ChipProps) => {
   return (
-    <span className={styles.chip} style={{ backgroundColor: chipColor(status) }}>
+    <span
+      className={styles.chip}
+      style={{ backgroundColor: chipColor(status) }}
+    >
       {value}
     </span>
   )

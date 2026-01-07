@@ -5,7 +5,10 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`} />
+        <script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+        />
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -18,7 +21,10 @@ export default function Document() {
           `,
           }}
         />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css" />
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css"
+        />
       </Head>
       <body>
         <Main />
