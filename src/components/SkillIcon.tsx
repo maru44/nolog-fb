@@ -1,3 +1,4 @@
+import type { JSX } from 'react'
 import styles from 'src/styles/components/skillicon.module.css'
 
 type SkillIconProps = {
