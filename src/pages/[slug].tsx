@@ -65,7 +65,9 @@ interface IParams extends ParsedUrlQuery {
   slug: string
 }
 
-export const getStaticProps: GetStaticProps<PostProps, IParams> = async (context) => {
+export const getStaticProps: GetStaticProps<PostProps, IParams> = async (
+  context,
+) => {
   const { slug } = context.params!
   const database = (await getDatabase(blogDatabaseId)) as PageObjectResponse[]
   const page = database.find((page) => getPageSlug(page) === slug)

@@ -8,10 +8,17 @@ export const SkillIcon = ({ skill }: SkillIconProps) => {
   let icon: JSX.Element | undefined = undefined
   switch (skill) {
     case 'go':
-      icon = <i className="devicon-go-original-wordmark" style={{ fontSize: '30px' }} />
+      icon = (
+        <i
+          className="devicon-go-original-wordmark"
+          style={{ fontSize: '30px' }}
+        />
+      )
       break
     case 'React':
-      icon = <i className="devicon-react-original" style={{ fontSize: '30px' }} />
+      icon = (
+        <i className="devicon-react-original" style={{ fontSize: '30px' }} />
+      )
       break
     case 'Firebase':
       icon = <i className="devicon-firebase-plain" />
@@ -59,13 +66,23 @@ export const SkillIcon = ({ skill }: SkillIconProps) => {
       icon = <i className="devicon-github-original" />
       break
     case 'Vercel':
-      icon = <img src="/icons/logo-vercel-svgrepo-com.svg" alt="Vercel" width="24px" />
+      icon = (
+        <img
+          src="/icons/logo-vercel-svgrepo-com.svg"
+          alt="Vercel"
+          width="24px"
+        />
+      )
       break
     case 'Sentry':
-      icon = <img src="/icons/sentry-svgrepo-com.svg" alt="Sentry" width="24px" />
+      icon = (
+        <img src="/icons/sentry-svgrepo-com.svg" alt="Sentry" width="24px" />
+      )
       break
     case 'GCP':
-      icon = <img src="/icons/google-cloud-platform.svg" alt="GCP" width="30px" />
+      icon = (
+        <img src="/icons/google-cloud-platform.svg" alt="GCP" width="30px" />
+      )
       break
     case 'vite':
       icon = <img src="/icons/vite.svg" alt="vite" width="24px" />
@@ -74,7 +91,13 @@ export const SkillIcon = ({ skill }: SkillIconProps) => {
       icon = <img src="/icons/aws.svg" alt="AWS" width="30px" />
       break
     case 'bottle':
-      icon = <img src="/icons/flask-round-svgrepo-com.svg" alt="bottle" width="24px" />
+      icon = (
+        <img
+          src="/icons/flask-round-svgrepo-com.svg"
+          alt="bottle"
+          width="24px"
+        />
+      )
   }
   if (!!icon) {
     return (

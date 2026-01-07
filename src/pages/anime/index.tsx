@@ -33,7 +33,10 @@ const Animes = ({ data }: ListPageProps) => {
                     </p>
                     <div className={styles.animeScore}>{scoreStr}</div>
                     <div className={styles.animeStatus}>
-                      <Chip status={ColorFromAnimeStatus(status)} value={status} />
+                      <Chip
+                        status={ColorFromAnimeStatus(status)}
+                        value={status}
+                      />
                     </div>
                   </div>
                 </li>

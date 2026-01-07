@@ -20,7 +20,12 @@ type GaEventProps = {
   value?: number
 }
 
-export const event = ({ action, category, label, value }: GaEventProps): void => {
+export const event = ({
+  action,
+  category,
+  label,
+  value,
+}: GaEventProps): void => {
   if (!GA_TRACKING_ID) {
     return
   }

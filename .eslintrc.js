@@ -1,10 +1,15 @@
 module.exports = {
-  extends: ['react-app', 'react-app/jest', 'plugin:prettier/recommended', 'next'],
+  extends: [
+    'react-app',
+    'react-app/jest',
+    'plugin:prettier/recommended',
+    'next',
+  ],
   plugins: ['prettier'],
   rules: {
     'no-restricted-imports': ['error', { patterns: ['./', '../', '.'] }],
     'prettier/prettier': 'error',
     'react-hooks/exhaustive-deps': ['error'],
-    '@next/next/no-img-element': 'off'
+    '@next/next/no-img-element': 'off',
   },
 }
