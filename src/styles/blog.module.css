@@ -116,6 +116,16 @@
   margin: 80px 0 20px 0;
 }
 
+.content ul,
+.content ol {
+  padding-left: 1em;
+  margin: 0.5em 0;
+}
+
+.content li {
+  margin-left: 1em;
+}
+
 @media (prefers-color-scheme: dark) {
   .content .code {
     background-color: rgb(15, 8, 28);
