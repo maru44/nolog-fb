@@ -11,19 +11,18 @@
     "format": "biome format --write"
   },
   "dependencies": {
-    "dotenv": "^16.4.1",
     "next": "^16.1.1",
     "react": "^19.2.3",
     "react-dom": "^19.2.3"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.3.11",
-    "@notionhq/client": "^2.2.3",
+    "@notionhq/client": "^5.31.1",
     "@types/gtag.js": "^0.0.20",
     "@types/node": "^24.19.2",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "next-sitemap": "^4.2.3",
-    "typescript": "^5"
+    "typescript": "^7.0.2"
   }
 }

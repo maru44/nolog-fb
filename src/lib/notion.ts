@@ -1,29 +1,46 @@
-import { Client } from '@notionhq/client'
-import { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints'
-import { Anime, AnimeStatus } from 'src/types/anime'
-import { Blog } from 'src/types/blog'
-import { Indie, IndieStatus } from 'src/types/indie'
-import { blockWithChildren } from 'src/types/notion'
+import type {
+  PageObjectResponse,
+  QueryDataSourceFilter,
+  QueryDataSourceSort,
+} from '@notionhq/client'
+import { Client, isFullDatabase } from '@notionhq/client'
+import type { Anime, AnimeStatus } from 'src/types/anime'
+import type { Blog } from 'src/types/blog'
+import type { Indie, IndieStatus } from 'src/types/indie'
+import type { blockWithChildren } from 'src/types/notion'
 
 const notion = new Client({
   auth: process.env.NOTION_TOKEN,
 })
 
+// Notion API 2025-09-03 以降、DB の行は database ではなく
+// その配下の data source に対して query する。
+// 既存の *_DATABASE_ID をそのまま使えるよう、ここで data source id に解決する。
+const dataSourceIdCache = new Map<string, string>()
+
+const resolveDataSourceId = async (databaseId: string): Promise<string> => {
+  const cached = dataSourceIdCache.get(databaseId)
+  if (cached) {
+    return cached
+  }
+  const database = await notion.databases.retrieve({
+    database_id: databaseId,
+  })
+  if (!isFullDatabase(database)) {
+    throw new Error(`cannot read data sources of database ${databaseId}`)
+  }
+  const dataSourceId = database.data_sources[0]?.id
+  if (!dataSourceId) {
+    throw new Error(`database ${databaseId} has no data source`)
+  }
+  dataSourceIdCache.set(databaseId, dataSourceId)
+  return dataSourceId
+}
+
 // ref: https://www.npmjs.com/package/@notionhq/client
 export const getDatabase = async (
   databaseId: string,
-  sorts?:
-    | (
-        | {
-            property: string
-            direction: 'ascending' | 'descending'
-          }
-        | {
-            timestamp: 'created_time' | 'last_edited_time'
-            direction: 'ascending' | 'descending'
-          }
-      )[]
-    | undefined,
+  sorts?: QueryDataSourceSort[],
   filter?: {
     property: string
     checkbox: {
@@ -32,10 +49,11 @@ export const getDatabase = async (
   },
   start_cursor?: string,
 ) => {
+  const dataSourceId = await resolveDataSourceId(databaseId)
   let hasNext = true
   let results: PageObjectResponse[] = []
   let cursor = start_cursor
-  const finalFilter = filter
+  const finalFilter: QueryDataSourceFilter = filter
     ? {
         and: [
           filter,
@@ -56,8 +74,8 @@ export const getDatabase = async (
         },
       }
   while (hasNext) {
-    const response = await notion.databases.query({
-      database_id: databaseId,
+    const response = await notion.dataSources.query({
+      data_source_id: dataSourceId,
       filter: finalFilter,
       sorts: sorts,
       start_cursor: cursor,
@@ -84,7 +102,7 @@ export const getPage = async (pageId: string) => {
 
 export const getBlocks = async (blockId: string) => {
   const blocks: blockWithChildren[] = []
-  let cursor: undefined | string = undefined
+  let cursor: undefined | string
 
   while (true) {
     const blocksList = await notion.blocks.children.list({
@@ -140,7 +158,7 @@ export const getData = (page: PageObjectResponse): Blog => {
     published = page.properties.Published.checkbox
   }
   if (page.properties.Date.type === 'date' && page.properties.Date.date) {
-    if (!!page.properties.Date.date.start) {
+    if (page.properties.Date.date.start) {
       date = new Date(page.properties.Date.date.start).toLocaleString('en-US', {
         month: 'short',
         day: '2-digit',
@@ -192,7 +210,7 @@ export const getIndieData = (page: PageObjectResponse): Indie => {
   }
   if (page.properties.Span.type === 'date' && page.properties.Span.date) {
     let start: string | undefined, end: string | undefined
-    if (!!page.properties.Span.date.start) {
+    if (page.properties.Span.date.start) {
       start = new Date(page.properties.Span.date.start).toLocaleString(
         'en-US',
         {
@@ -202,7 +220,7 @@ export const getIndieData = (page: PageObjectResponse): Indie => {
         },
       )
     }
-    if (!!page.properties.Span.date.end) {
+    if (page.properties.Span.date.end) {
       end = new Date(page.properties.Span.date.end).toLocaleString('en-US', {
         month: 'short',
         day: '2-digit',
@@ -262,7 +280,7 @@ export const getAnimeData = (page: PageObjectResponse): Anime => {
   }
   if (page.properties.Score.type === 'number') {
     score = page.properties.Score.number
-    if (!!score) {
+    if (score) {
       scoreStr = score.toString()
     }
   }

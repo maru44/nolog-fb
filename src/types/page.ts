@@ -1,4 +1,4 @@
-import { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints'
+import type { PageObjectResponse } from '@notionhq/client'
 import { blockWithChildren } from 'src/types/notion'
 
 export type ListPage = 'blog' | 'indie' | 'anime'
